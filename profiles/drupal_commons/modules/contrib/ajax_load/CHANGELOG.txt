@@ -1,7 +1,6 @@
-// $Id$
 
-6.x-1.x-dev
-===========
+6.x-1.4 (2011-08-15)
+====================
 
 Bugfixes:
 - #685918: Drupal.theme functions implemented by other modules are broken when javascript compression is enabled.

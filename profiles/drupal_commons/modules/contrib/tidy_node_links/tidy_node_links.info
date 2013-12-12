@@ -2,9 +2,9 @@ name = Tidy node links
 description = Cleans up the links typically presented at the bottom of a node by putting all links other than the "Add new comment" control in a dropdown control. 
 core = 6.x
 
-; Information added by drush on 2013-06-04
+; Information added by drush on 2013-12-06
 version = "6.x-1.x-dev"
 core = "6.x"
 project = "tidy_node_links"
-datestamp = "1370297101"
+datestamp = "1386288366"
 

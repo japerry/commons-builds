@@ -105,7 +105,7 @@ function og_features_menu_alter(&$items) {
     array_unshift($items[$key]['access arguments'], $page_callback);
     
     // Prepend the access callback to the array of access arguments
-    $access_callback = !isset($items[$key]['access callback']) || !$items[$key]['access callback'] ? 'user_access' : $items[$key]['access callback'];
+    $access_callback = !isset($items[$key]['access callback']) ? 'user_access' : $items[$key]['access callback'];
     array_unshift($items[$key]['access arguments'], $access_callback);
     
     // Override the access callback
@@ -363,21 +363,6 @@ function og_features_views_query_alter($view, &$query) {
  */
 function og_features_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
   switch ($op) {
-    case 'insert':
-    case 'update':
-      // Check if this is a group
-      if (og_is_group_type($node->type)) {
-        // If disabled features are set on the object, update our records
-        if (isset($node->features_disabled)) {
-          $features = array();
-          foreach ($node->features_disabled as $feature) {
-            $features[$feature] = OG_FEATURES_FEATURE_DISABLED;
-          }
-          og_features_save_feature_settings($node, $features);
-        }
-      }
-      break;
-    
     case 'load':
       // Attach the disabled features for the group
       if (og_is_group_type($node->type)) {
@@ -511,8 +496,13 @@ function og_features_menu_access_callback() {
 
     return call_user_func_array($access_callback, $access_args);
   }
+  // The access callback could be a simple boolean
+  elseif (is_bool($access_callback)) {
+    return $access_callback;
+  }
+  // Deny access, just to be safe
   else {
-    return TRUE;
+    return FALSE;
   }
 }
 

@@ -6,9 +6,9 @@ package = Userpoints
 core = 6.x
 
 
-; Information added by drush on 2013-06-04
+; Information added by drush on 2013-12-06
 version = "6.x-1.0-beta1+3-dev"
 core = "6.x"
 project = "userpoints_contrib"
-datestamp = "1370297124"
+datestamp = "1386288397"
 
