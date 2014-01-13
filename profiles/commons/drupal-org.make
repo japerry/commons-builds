@@ -9,7 +9,7 @@ projects[acquia_connector][version] = "2.12"
 
 projects[addressfield][type] = "module"
 projects[addressfield][subdir] = "contrib"
-projects[addressfield][version] = "1.0-beta4"
+projects[addressfield][version] = "1.0-beta5"
 
 projects[addressfield_tokens][type] = "module"
 projects[addressfield_tokens][subdir] = "contrib"
@@ -25,6 +25,9 @@ projects[admin_icons][download][revision] = "60d9f28801533fecc92216a60d444d89d80
 projects[advancedqueue][type] = "module"
 projects[advancedqueue][subdir] = "contrib"
 projects[advancedqueue][version] = "1.0-alpha2"
+; Cleanup of the advancedqueue table:
+; https://drupal.org/comment/7817905#comment-7817905
+projects[advancedqueue][patch][] = "https://drupal.org/files/purging_table-2054555.patch"
 
 projects[apachesolr][type] = "module"
 projects[apachesolr][subdir] = "contrib"
@@ -62,7 +65,18 @@ projects[connector][version] = "1.0-beta2"
 
 projects[ckeditor][type] = "module"
 projects[ckeditor][subdir] = "contrib"
-projects[ckeditor][version] = "1.13"
+projects[ckeditor][download][type] = "git"
+projects[ckeditor][download][url] = "http://git.drupal.org/project/ckeditor.git"
+projects[ckeditor][download][branch] = "7.x-1.x"
+projects[ckeditor][download][revision] = "b69a9ac"
+
+; Accomodate latest Media changes.
+; https://drupal.org/node/2159403
+projects[ckeditor][patch][] = "https://drupal.org/files/issues/ckeditor-accomodate-latest-media-changes-0.patch"
+
+; Remove redundant external plugin declarations.
+; https://drupal.org/comment/8284591#comment-8284591
+projects[ckeditor][patch][] = "https://drupal.org/files/issues/ckeditor-remove-external-plugin-declarations-1-alt.patch"
 
 projects[ctools][type] = "module"
 projects[ctools][subdir] = "contrib"
@@ -88,7 +102,7 @@ projects[custom_search][patch][] = "http://drupal.org/files/commons_search_js_en
 
 projects[date][type] = "module"
 projects[date][subdir] = "contrib"
-projects[date][version] = "2.6"
+projects[date][version] = "2.7"
 
 projects[date_facets][type] = "module"
 projects[date_facets][subdir] = "contrib"
@@ -108,13 +122,17 @@ projects[edit_profile][type] = "module"
 projects[edit_profile][subdir] = "contrib"
 projects[edit_profile][version] = "1.0-beta2"
 
+projects[elements][type] = "module"
+projects[elements][subdir] = "contrib"
+projects[elements][version] = "1.4"
+
 projects[email_registration][type] = "module"
 projects[email_registration][subdir] = "contrib"
 projects[email_registration][version] = "1.1"
 
 projects[entity][type] = "module"
 projects[entity][subdir] = "contrib"
-projects[entity][version] = "1.2"
+projects[entity][version] = "1.3"
 
 projects[entitycache][type] = "module"
 projects[entitycache][subdir] = "contrib"
@@ -130,7 +148,7 @@ projects[entityreference][version] = "1.1"
 
 projects[entityreference_prepopulate][type] = "module"
 projects[entityreference_prepopulate][subdir] = "contrib"
-projects[entityreference_prepopulate][version] = "1.3"
+projects[entityreference_prepopulate][version] = "1.4"
 
 projects[entity_translation][type] = "module"
 projects[entity_translation][subdir] = "contrib"
@@ -204,7 +222,7 @@ projects[media][subdir] = "contrib"
 projects[media][download][type] = "git"
 projects[media][download][url] = "http://git.drupal.org/project/media.git"
 projects[media][download][branch] = "7.x-2.x"
-projects[media][download][revision] = "7d12b8b"
+projects[media][download][revision] = "1f46a9a"
 
 projects[memcache][type] = "module"
 projects[memcache][subdir] = "contrib"
@@ -248,10 +266,7 @@ projects[mollom][version] = "2.8"
 
 projects[navbar][type] = "module"
 projects[navbar][subdir] = "contrib"
-projects[navbar][download][type] = "git"
-projects[navbar][download][url] = "http://git.drupal.org/project/navbar.git"
-projects[navbar][download][branch] = "7.x-1.x"
-projects[navbar][download][revision] = "dd542e1a74d9c9b3a9b5bd699aad9a4b65e5c5b7"
+projects[navbar][version] = "1.2"
 
 projects[oauth][type] = "module"
 projects[oauth][subdir] = "contrib"
@@ -262,7 +277,7 @@ projects[oauthconnector][subdir] = "contrib"
 projects[oauthconnector][download][type] = "git"
 projects[oauthconnector][download][url] = "http://git.drupal.org/project/oauthconnector.git"
 projects[oauthconnector][download][branch] = "7.x-1.x"
-projects[oauthconnector][download][revision] = "0ce7ac9614710c0f68d0a58cb4ae4667f8bd6fa7"
+projects[oauthconnector][download][revision] = "42c6f66"
 
 projects[oembed][type] = "module"
 projects[oembed][subdir] = "contrib"
@@ -321,10 +336,6 @@ projects[paranoia][version] = "1.3"
 projects[pathauto][type] = "module"
 projects[pathauto][subdir] = "contrib"
 projects[pathauto][version] = "1.2"
-
-projects[elements][type] = "module"
-projects[elements][subdir] = "contrib"
-projects[elements][version] = "1.4"
 
 projects[pm_existing_pages][type] = "module"
 projects[pm_existing_pages][subdir] = "contrib"
@@ -443,7 +454,7 @@ projects[views][version] = "3.7"
 
 projects[views_bulk_operations][type] = "module"
 projects[views_bulk_operations][subdir] = "contrib"
-projects[views_bulk_operations][version] = "3.1"
+projects[views_bulk_operations][version] = "3.2"
 
 projects[views_field_view][type] = "module"
 projects[views_field_view][subdir] = "contrib"
@@ -482,6 +493,13 @@ projects[adaptivetheme][patch][] = "http://drupal.org/files/remove-comment-creat
 ; https://drupal.org/comment/8289329#comment-8289329
 projects[adaptivetheme][patch][] = "https://drupal.org/files/issues/add-link-button-styling-2159783-1.patch"
 
+projects[ember][type] = "theme"
+projects[ember][subdir] = "contrib"
+projects[ember][download][type] = "git"
+projects[ember][download][url] = "http://git.drupal.org/project/ember.git"
+projects[ember][download][branch] = "7.x-2.x"
+projects[ember][download][revision] = "5b8b0f6"
+
 projects[sky][type] = "theme"
 projects[sky][subdir] = "contrib"
 projects[sky][version] = "3.0-rc1"
@@ -494,7 +512,7 @@ libraries[backbone][type] = "libraries"
 libraries[backbone][download][url] = "https://github.com/jashkenas/backbone/archive/1.1.0.tar.gz"
 
 libraries[ckeditor][download][type] = "get"
-libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.0/ckeditor_4.0_full.tar.gz"
+libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.3.1/ckeditor_4.3.1_full.zip"
 libraries[ckeditor][type] = "libraries"
 
 libraries[modernizr][download][type] = "get"
@@ -503,7 +521,7 @@ libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/ar
 
 libraries[timeago][download][type] = "get"
 libraries[timeago][type] = "libraries"
-libraries[timeago][download][url] = "https://raw.github.com/rmm5t/jquery-timeago/v1.3.0/jquery.timeago.js"
+libraries[timeago][download][url] = "https://raw.github.com/rmm5t/jquery-timeago/v1.3.1/jquery.timeago.js"
 
 libraries[underscore][download][type] = "get"
 libraries[underscore][type] = "libraries"

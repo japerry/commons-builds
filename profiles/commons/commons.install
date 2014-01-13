@@ -41,7 +41,7 @@ function commons_requirements($phase) {
       // throw error if there is less than 96MB available
       if ($shm_size && $shm_size < COMMONS_MINIMUM_APC_CACHE) {
         $requirements['apc_shm_size']['description'] = $t('APC is installed but %shm_size is not enough APC cache to successfully install Drupal Commons.
-           Find your <em>apc.ini</em> file and change the <em>apc.shm_size</em> value to at least <em>96M</em>.', array('%shm_size' => COMMONS_MINIMUM_APC_CACHE . 'M'));
+           Find your <em>apc.ini</em> file and change the <em>apc.shm_size</em> value to at least <em>%min_shm_size</em>.', array('%shm_size' => $shm_size . 'M', '%min_shm_size' => COMMONS_MINIMUM_APC_CACHE . 'M'));
         $requirements['apc_shm_size']['severity'] = REQUIREMENT_ERROR;
       }
     }
@@ -58,7 +58,7 @@ function commons_requirements($phase) {
  */
 function commons_install() {
   // Enable the Origins theme and set it as the default.
-  theme_enable(array('adaptivetheme', 'commons_origins', 'adaptivetheme_admin'));
+  theme_enable(array('adaptivetheme', 'commons_origins'));
 
     // The Bartik theme is automatically enabled during installation. Disable it.
   db_update('system')
@@ -70,7 +70,7 @@ function commons_install() {
   // Set the default and administration themes.
   variable_set('theme_default', 'commons_origins');
   // Set a default administrative theme:
-  variable_set('admin_theme', 'adaptivetheme_admin');
+  variable_set('admin_theme', 'ember');
   variable_set('node_admin_theme', FALSE);
 
   // Do not use the administration theme when editing or creating content.
@@ -104,19 +104,6 @@ function commons_install() {
     'title' => '<none>',
   );
   drupal_write_record('block', $search_block);
-
-  // Create a default role for site administrators, with all available permissions assigned.
-  $admin_role = new stdClass();
-  $admin_role->name = 'administrator';
-  $admin_role->weight = 2;
-  user_role_save($admin_role);
-  // Set this as the administrator role.
-  variable_set('user_admin_role', $admin_role->rid);
-
-  // Assign user 1 the "administrator" role.
-  db_insert('users_roles')
-    ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
-    ->execute();
 
   // AdaptiveTheme requires that the system theme settings form
   // be submitted in order for its themes' settings to be properly set
@@ -254,10 +241,9 @@ function commons_update_3109() {
 }
 
 /**
- * Enable the File Entity, Media, Media Internet, oEmbed and Commons: Media modules.
+ * Change the administration theme to Ember.
  */
-function commons_update_3110() {
-  $module_list = array('file_entity', 'media', 'media_internet', 'oembed', 'commons_media');
-  module_enable($module_list);
+function commons_update_3111() {
+  variable_set('admin_theme', 'ember');
   return array();
 }
