@@ -144,6 +144,10 @@ projects[features][type] = "module"
 projects[features][subdir] = "contrib"
 projects[features][version] = "2.0"
 
+projects[file_entity][type] = "module"
+projects[file_entity][subdir] = "contrib"
+projects[file_entity][version] = "2.0-alpha3"
+
 projects[flag][type] = "module"
 projects[flag][subdir] = "contrib"
 projects[flag][version] = "2.1"
@@ -189,11 +193,18 @@ projects[libraries][version] = "2.1"
 
 projects[lingotek][type] = "module"
 projects[lingotek][subdir] = "contrib"
-projects[lingotek][version] = "4.09"
+projects[lingotek][version] = "4.10"
 
 projects[link][type] = "module"
 projects[link][subdir] = "contrib"
-projects[link][version] = "1.1"
+projects[link][version] = "1.2"
+
+projects[media][type] = "module"
+projects[media][subdir] = "contrib"
+projects[media][download][type] = "git"
+projects[media][download][url] = "http://git.drupal.org/project/media.git"
+projects[media][download][branch] = "7.x-2.x"
+projects[media][download][revision] = "7d12b8b"
 
 projects[memcache][type] = "module"
 projects[memcache][subdir] = "contrib"
@@ -227,10 +238,6 @@ projects[metatag][type] = "module"
 projects[metatag][subdir] = "contrib"
 projects[metatag][version] = "1.0-beta7"
 
-; Support for rel=author link in head.
-; http://drupal.org/node/1865228#comment-6839604
-projects[metatag][patch][] = "http://drupal.org/files/metatag-n1865228-3.patch"
-
 projects[module_filter][type] = "module"
 projects[module_filter][subdir] = "contrib"
 projects[module_filter][version] = "1.8"
@@ -257,13 +264,40 @@ projects[oauthconnector][download][url] = "http://git.drupal.org/project/oauthco
 projects[oauthconnector][download][branch] = "7.x-1.x"
 projects[oauthconnector][download][revision] = "0ce7ac9614710c0f68d0a58cb4ae4667f8bd6fa7"
 
+projects[oembed][type] = "module"
+projects[oembed][subdir] = "contrib"
+projects[oembed][download][type] = "git"
+projects[oembed][download][url] = "http://git.drupal.org/project/oembed.git"
+projects[oembed][download][branch] = "7.x-1.x"
+projects[oembed][download][revision] = "63898e1"
+
+; Add oEmbed plugins to list of supported media providers
+; https://drupal.org/comment/8287243#comment-8287243
+projects[oembed][patch][] = "https://drupal.org/files/issues/list-enabled-plugins-2159335-1.patch"
+
+; Remove WYSIWYG special casing
+; https://drupal.org/comment/8287861#comment-8287861
+projects[oembed][patch][] = "https://drupal.org/files/issues/remove-wysiwyg-special-casing-2159303-2.patch"
+
+; Provided a default display configuration
+; https://drupal.org/comment/8286995#comment-8286995
+projects[oembed][patch][] = "https://drupal.org/files/issues/provide-default-display-configuration-2128389-3.patch"
+
+; Add supported file and MIME type information to file formatters
+; https://drupal.org/comment/8286935#comment-8286935
+projects[oembed][patch][] = "https://drupal.org/files/issues/add-file-and-mime-type-information-to-formatters-2159275-1.patch"
+
+; Themed images ignore width, height, alt and title attributes
+; https://drupal.org/comment/8286915#comment-8286915
+projects[oembed][patch][] = "https://drupal.org/files/issues/prefer-element-attributes-2159269-1.patch"
+
 projects[og][type] = "module"
 projects[og][subdir] = "contrib"
 projects[og][version] = "2.4"
 
 ; Auto-assign role to group manager broken on groups with overridden roles.
 ; https://drupal.org/node/2005800#comment-7684873
-projects[og][patch][] = "http://drupal.org/files/og-default-role-member-2005800-21.patch"
+projects[og][patch][] = "http://drupal.org/files/issues/og-default-role-member-2005800-25.patch"
 
 ; og_ui should give users the theme, not admin ui when creating groups.
 ; http://drupal.org/node/1800208
@@ -275,19 +309,10 @@ projects[panelizer][version] = "3.1"
 
 projects[panels][type] = "module"
 projects[panels][subdir] = "contrib"
-projects[panels][version] = "3.3"
-
-; Fatal error: Call to undefined function panels_get_layouts().
-; http://drupal.org/node/1828684#comment-6694732
-projects[panels][patch][] = "http://drupal.org/files/1828684-layout-fix-6.patch"
-
-; PHP 5.3.9 Strict Warning on Panels Empty Value.
-; http://drupal.org/node/1632898#comment-6412840
-projects[panels][patch][] = "http://drupal.org/files/panels-n1632898-15.patch"
-
-; Add internationalization support.
-; http://drupal.org/node/1179034#comment-7216342
-projects[panels][patch][] = "http://drupal.org/files/panels-1179034-41_____panels-uuids-127790-100__-80.patch"
+projects[panels][download][type] = "git"
+projects[panels][download][url] = "http://git.drupal.org/project/panels.git"
+projects[panels][download][branch] = "7.x-3.x-i18n"
+projects[panels][download][revision] = "43a3810e8b0d2ef435ef2bb190039391c8e1712f"
 
 projects[paranoia][type] = "module"
 projects[paranoia][subdir] = "contrib"
@@ -297,9 +322,9 @@ projects[pathauto][type] = "module"
 projects[pathauto][subdir] = "contrib"
 projects[pathauto][version] = "1.2"
 
-projects[placeholder][type] = "module"
-projects[placeholder][subdir] = "contrib"
-projects[placeholder][version] = "1.0"
+projects[elements][type] = "module"
+projects[elements][subdir] = "contrib"
+projects[elements][version] = "1.4"
 
 projects[pm_existing_pages][type] = "module"
 projects[pm_existing_pages][subdir] = "contrib"
@@ -364,10 +389,6 @@ projects[registration][version] = "1.2"
 projects[rich_snippets][type] = "module"
 projects[rich_snippets][subdir] = "contrib"
 projects[rich_snippets][version] = "1.0-beta3"
-
-; Remove snippets from non-node type searches.
-; http://drupal.org/node/1923904#comment-7094488
-projects[rich_snippets][patch][] = "http://drupal.org/files/1923904-search-nodes-only.patch"
 
 projects[rules][type] = "module"
 projects[rules][subdir] = "contrib"
@@ -434,7 +455,7 @@ projects[views_litepager][version] = "3.0"
 
 projects[views_load_more][type] = "module"
 projects[views_load_more][subdir] = "contrib"
-projects[views_load_more][version] = "1.1"
+projects[views_load_more][version] = "1.2"
 
 projects[votingapi][type] = "module"
 projects[votingapi][subdir] = "contrib"
@@ -457,6 +478,10 @@ projects[adaptivetheme][download][revision] = "b4b38c3c01d066e733c2942020c51962c
 ; http://drupal.org/node/1427226#comment-6638836
 projects[adaptivetheme][patch][] = "http://drupal.org/files/remove-comment-creation-link-2018081-1.patch"
 
+; Add styling for link buttons.
+; https://drupal.org/comment/8289329#comment-8289329
+projects[adaptivetheme][patch][] = "https://drupal.org/files/issues/add-link-button-styling-2159783-1.patch"
+
 projects[sky][type] = "theme"
 projects[sky][subdir] = "contrib"
 projects[sky][version] = "3.0-rc1"
@@ -475,10 +500,6 @@ libraries[ckeditor][type] = "libraries"
 libraries[modernizr][download][type] = "get"
 libraries[modernizr][type] = "libraries"
 libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/archive/v2.7.0.tar.gz"
-
-libraries[placeholder][download][type] = "get"
-libraries[placeholder][type] = "libraries"
-libraries[placeholder][download][url] = "https://github.com/mathiasbynens/jquery-placeholder/archive/v2.0.7.tar.gz"
 
 libraries[timeago][download][type] = "get"
 libraries[timeago][type] = "libraries"

@@ -19,3 +19,10 @@ features[message_type][] = commons_follow_user_user_followed
 features[views_view][] = commons_follow_user
 features[views_view][] = commons_follow_user_followers
 features[views_view][] = commons_follow_user_following
+
+; Information added by Drupal.org packaging script on 2013-12-20
+version = "7.x-3.6"
+core = "7.x"
+project = "commons"
+datestamp = "1387568907"
+

@@ -11,3 +11,10 @@ features[flag][] = commons_follow_node
 features[flag][] = email_node
 features[views_view][] = commons_follow_node
 features_exclude[dependencies][views] = views
+
+; Information added by Drupal.org packaging script on 2013-12-20
+version = "7.x-3.6"
+core = "7.x"
+project = "commons"
+datestamp = "1387568907"
+

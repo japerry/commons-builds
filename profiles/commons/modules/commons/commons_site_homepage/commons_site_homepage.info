@@ -20,3 +20,10 @@ features[page_manager_pages][] = commons_home
 features[variable][] = site_frontpage
 features[views_view][] = commons_homepage_content
 features_exclude[dependencies][views_content] = views_content
+
+; Information added by Drupal.org packaging script on 2013-12-20
+version = "7.x-3.6"
+core = "7.x"
+project = "commons"
+datestamp = "1387568907"
+
