@@ -581,6 +581,13 @@ function ckeditor_admin_profile_form($form, $form_state, $profile = NULL) {
 
   $lang_options = ckeditor_load_lang_options();
 
+  // Attach the administration CSS.
+  $form['#attached'] = array(
+    'css' => array(
+      drupal_get_path('module', 'ckeditor') . '/css/ckeditor.admin.css',
+    ),
+  );
+
   $form['basic'] = array(
     '#type' => 'fieldset',
     '#title' => t('Basic setup'),

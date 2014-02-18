@@ -230,16 +230,8 @@
     th,
     td {
       margin: 0;
-      padding: $rhythm-space;
+      padding: $rhythm-space-short $rhythm-space;
       border-bottom: $base-border-width solid $color-border;
-
-      *:first-child {
-        margin-top: 0;
-      }
-
-      *:last-child {
-        margin-bottom: 0;
-      }
     }
   }
 
@@ -265,46 +257,30 @@
       @include box-sizing(border-box);
       width: 100%;
       max-width: 100%;
+      min-height: ms(1);
       margin: ($rhythm-space * 2) 0 $rhythm-space;
       padding: 0;
-      border: 0 solid $color-border;
+      border: {
+        /* There needs to be some width or Webkit will freak. */
+        width: 1px 0;
+        style: solid;
+        color: transparent;
+      }
 
       [dir="ltr"] & {
-        padding-left: $rhythm-space;
-        border-left-width: $rhythm-space-short;
+        padding-left: $inset-space;
       }
 
       [dir="rtl"] & {
-        padding-right: $rhythm-space;
-        border-right-width: $rhythm-space-short;
-      }
-
-      > :first-child,
-      > legend + * {
-        margin-top: 0;
-      }
-
-      > :last-child {
-        margin-bottom: 0;
+        padding-right: $inset-space;
       }
     }
 
     legend {
-      display: block;
+      margin-bottom: $rhythm-space;
       font: {
         size: ms(1);
         weight: $font-light;
-      }
-      line-height: normal;
-      margin: -$rhythm-space 0 0;
-      padding: 0 0 ($rhythm-space / ms(1) * 1em);
-
-      [dir="ltr"] & {
-        margin-left: -($rhythm-space + $rhythm-space-short) / ms(1) * 1em;
-      }
-
-      [dir="rtl"] & {
-        margin-right: -($rhythm-space + $rhythm-space-short) / ms(1) * 1em;
       }
     }
 
@@ -345,7 +321,7 @@
       -webkit-appearance: none;
       @include box-sizing(border-box);
       margin: $rhythm-space-short 0;
-      padding: $rhythm-space;
+      padding: $rhythm-space-short $rhythm-space;
       max-width: 100%;
       border: $base-border-width solid $color-border;
       @include border-radius;
@@ -363,12 +339,10 @@
       }
 
       &.required {
-        color: $color-warning;
         border-color: $color-warning;
       }
 
       &.error {
-        color: $color-error;
         border-color: $color-error;
       }
 

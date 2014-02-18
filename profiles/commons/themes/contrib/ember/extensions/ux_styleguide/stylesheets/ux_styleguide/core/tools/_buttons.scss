@@ -10,7 +10,7 @@
 // These are the default skins and sizes. They can be overridden with alternate
 // values.
 $buttons: (default, $color-border) (active, shade($color-border, 20)) (primary, $color-link) (primary-active, $color-link-visited) (alternate, $color-link-alternate) (alternate-active, $color-link-alternate-visited) !default;
-$button-sizes: (default, ms(0), $rhythm-space ms(0)) (small, ms(-1), $rhythm-space ms(0)) (large, ms(1), $rhythm-space ms(0)) !default;
+$button-sizes: (default, ms(0), $rhythm-space ms(0)) (small, ms(0), $rhythm-space-short ms(0)) (large, ms(1), $rhythm-space ms(0)) !default;
 $button-contrast: 80 !default;
 
 // Bulk generate buttons styles with a list of settings.
@@ -23,7 +23,7 @@ $button-contrast: 80 !default;
     margin: ms(-5);
     max-width: 100%;
     overflow: visible;
-    line-height: 1.25em;
+    line-height: 1em;
     vertical-align: baseline;
     border: none;
     @include border-radius;

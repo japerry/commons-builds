@@ -67,17 +67,12 @@ html.js[dir="rtl"] .throbbing {
 html.js .collapsed {
   height: 0.70711em;
   margin-bottom: 1.41421em;
-  border-color: transparent;
 }
 html.js .collapsed .fieldset-wrapper {
   display: none;
 }
 html.js .collapsible {
   position: relative;
-  -webkit-transition: border-color 0.4s;
-  -moz-transition: border-color 0.4s;
-  -o-transition: border-color 0.4s;
-  transition: border-color 0.4s;
 }
 html.js .collapsible .fieldset-legend {
   display: block;
@@ -114,39 +109,61 @@ body.drag {
   cursor: move;
 }
 
+.draggable td {
+  vertical-align: top;
+}
 .draggable td:first-child {
-  padding-left: 0;
+  padding-left: 1.85355em;
 }
 
 .tabledrag-handle {
   text-decoration: none;
 }
 .tabledrag-handle, .tabledrag-handle:link, .tabledrag-handle:visited {
-  color: #cccccc;
+  color: #2fa6e5;
 }
-.tabledrag-handle:hover, .tabledrag-handle:active, .tabledrag-handle:focus {
+.drag .tabledrag-handle, .tabledrag-handle:hover, .tabledrag-handle:active, .tabledrag-handle:focus {
   color: #f05724;
 }
 .draggable .tabledrag-handle {
+  display: block;
+  float: left;
+  margin-top: 0.70711em;
+  margin-left: -1.85355em;
+  width: 0;
+  overflow: hidden;
   cursor: move;
   text-decoration: none;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -webkit-transition-property: width, opacity;
+  -moz-transition-property: width, opacity;
+  -o-transition-property: width, opacity;
+  transition-property: width opacity;
+  -webkit-transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  transition-duration: 0.4s;
 }
-.tabledrag-handle .handle {
-  display: inline-block;
-  vertical-align: middle;
-}
-[dir="ltr"] .tabledrag-handle .handle {
-  margin-right: 0.35355em;
-  margin-left: 0.70711em;
-}
-[dir="rtl"] .tabledrag-handle .handle {
-  margin-right: 0.70711em;
-  margin-left: 0.35355em;
+.draggable:hover .tabledrag-handle, .draggable.drag .tabledrag-handle {
+  width: 1.5em;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
 }
 .tabledrag-handle .handle:before {
-  line-height: 1em;
+  display: block;
+  content: "\283f \2836";
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: .25em 0;
+  white-space: normal;
+  line-height: .523em;
   font-size: 1.5em;
-  content: "\2261";
+  width: 1em;
 }
 
 .tabledrag-handle-hover .handle {

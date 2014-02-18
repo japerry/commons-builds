@@ -24,9 +24,9 @@ regions[sidebar_first] = First sidebar
 regions_hidden[] = sidebar_first
 
 
-; Information added by drush on 2014-01-10
-version = "7.x-2.0-alpha1+45-dev"
+; Information added by drush on 2014-01-16
+version = "7.x-2.0-alpha1+46-dev"
 core = "7.x"
 project = "ember"
-datestamp = "1389381814"
+datestamp = "1389902313"
 

@@ -57,7 +57,10 @@ projects[apachesolr_user][patch][] = "http://drupal.org/files/2077281-apache-sol
 
 projects[breakpoints][type] = "module"
 projects[breakpoints][subdir] = "contrib"
-projects[breakpoints][version] = "1.1"
+projects[breakpoints][download][type] = "git"
+projects[breakpoints][download][url] = "http://git.drupal.org/project/breakpoints.git"
+projects[breakpoints][download][branch] = "7.x-1.x"
+projects[breakpoints][download][revision] = "c4f3665"
 
 projects[connector][type] = "module"
 projects[connector][subdir] = "contrib"
@@ -69,6 +72,10 @@ projects[ckeditor][download][type] = "git"
 projects[ckeditor][download][url] = "http://git.drupal.org/project/ckeditor.git"
 projects[ckeditor][download][branch] = "7.x-1.x"
 projects[ckeditor][download][revision] = "b69a9ac"
+
+; Only load CSS when necessary.
+; https://drupal.org/node/1370894
+projects[ckeditor][patch][] = "https://drupal.org/files/issues/attach-ckeditor-css-1370894-4.patch"
 
 ; Accomodate latest Media changes.
 ; https://drupal.org/node/2159403
@@ -266,7 +273,7 @@ projects[mollom][version] = "2.8"
 
 projects[navbar][type] = "module"
 projects[navbar][subdir] = "contrib"
-projects[navbar][version] = "1.2"
+projects[navbar][version] = "1.3"
 
 projects[oauth][type] = "module"
 projects[oauth][subdir] = "contrib"
@@ -285,6 +292,10 @@ projects[oembed][download][type] = "git"
 projects[oembed][download][url] = "http://git.drupal.org/project/oembed.git"
 projects[oembed][download][branch] = "7.x-1.x"
 projects[oembed][download][revision] = "63898e1"
+
+; Fix PHP fatal error when enabling the module
+; https://drupal.org/comment/7987343#comment-7987343
+projects[oembed][patch][] = "https://drupal.org/files/oembed-2021015-1.patch"
 
 ; Add oEmbed plugins to list of supported media providers
 ; https://drupal.org/comment/8287243#comment-8287243
@@ -336,6 +347,33 @@ projects[paranoia][version] = "1.3"
 projects[pathauto][type] = "module"
 projects[pathauto][subdir] = "contrib"
 projects[pathauto][version] = "1.2"
+
+projects[picture][type] = "module"
+projects[picture][subdir] = "contrib"
+projects[picture][download][type] = "git"
+projects[picture][download][url] = "http://git.drupal.org/project/picture.git"
+projects[picture][download][branch] = "7.x-1.x"
+projects[picture][download][revision] = "18b94b9"
+
+; Add ctools as a dependency
+; https://drupal.org/node/2173043
+projects[picture][patch][] = "https://drupal.org/files/issues/add-ctools-dependency-2173043-1.patch"
+
+; Allow filter tips to be translated
+; https://drupal.org/node/2139459
+projects[picture][patch][] = "https://drupal.org/files/issues/translate-filter-tips-2139459-1.patch"
+
+; Move hook_uninstall() to picture.install to fix issues on uninstall.
+; https://drupal.org/node/2173015
+projects[picture][patch][] = "https://drupal.org/files/issues/move-uninstall-hook-implementation-2173015-1.patch"
+
+; Remove implementation of hook_file_formatter_info() to remove duplicate file formatter.
+; https://drupal.org/node/2172841
+projects[picture][patch][] = "https://drupal.org/files/issues/remove-file-formatter-hook-implementation-2172831-1.patch"
+
+; Remove implementation of hook_ctools_plugin_api() to fix issues with features.
+; https://drupal.org/node/2172831
+projects[picture][patch][] = "https://drupal.org/files/issues/remove-ctools-hook-implementation-2172831-1.patch"
 
 projects[pm_existing_pages][type] = "module"
 projects[pm_existing_pages][subdir] = "contrib"
@@ -416,6 +454,10 @@ projects[search_facetapi][version] = "1.0-beta2"
 projects[sharethis][type] = "module"
 projects[sharethis][subdir] = "contrib"
 projects[sharethis][version] = "2.5"
+
+projects[smartcrop][type] = "module"
+projects[smartcrop][subdir] = "contrib"
+projects[smartcrop][version] = "1.0-beta2"
 
 projects[strongarm][type] = "module"
 projects[strongarm][subdir] = "contrib"
@@ -498,7 +540,7 @@ projects[ember][subdir] = "contrib"
 projects[ember][download][type] = "git"
 projects[ember][download][url] = "http://git.drupal.org/project/ember.git"
 projects[ember][download][branch] = "7.x-2.x"
-projects[ember][download][revision] = "5b8b0f6"
+projects[ember][download][revision] = "1d88894"
 
 projects[sky][type] = "theme"
 projects[sky][subdir] = "contrib"
@@ -515,9 +557,21 @@ libraries[ckeditor][download][type] = "get"
 libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.3.1/ckeditor_4.3.1_full.zip"
 libraries[ckeditor][type] = "libraries"
 
+libraries[ckeditor_lineutils][download][type] = "get"
+libraries[ckeditor_lineutils][download][url] = "http://download.ckeditor.com/lineutils/releases/lineutils_4.3.1.zip"
+libraries[ckeditor_lineutils][type] = "libraries"
+libraries[ckeditor_lineutils][subdir] = "ckeditor/plugins"
+libraries[ckeditor_lineutils][directory_name] = "lineutils"
+
+libraries[ckeditor_widget][download][type] = "get"
+libraries[ckeditor_widget][download][url] = "http://download.ckeditor.com/widget/releases/widget_4.3.1.zip"
+libraries[ckeditor_widget][type] = "libraries"
+libraries[ckeditor_widget][subdir] = "ckeditor/plugins"
+libraries[ckeditor_widget][directory_name] = "widget"
+
 libraries[modernizr][download][type] = "get"
 libraries[modernizr][type] = "libraries"
-libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/archive/v2.7.0.tar.gz"
+libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/archive/v2.7.1.tar.gz"
 
 libraries[timeago][download][type] = "get"
 libraries[timeago][type] = "libraries"
@@ -525,4 +579,4 @@ libraries[timeago][download][url] = "https://raw.github.com/rmm5t/jquery-timeago
 
 libraries[underscore][download][type] = "get"
 libraries[underscore][type] = "libraries"
-libraries[underscore][download][url] = "https://github.com/jashkenas/underscore/archive/1.4.4.zip"
+libraries[underscore][download][url] = "https://github.com/jashkenas/underscore/archive/1.5.2.zip"

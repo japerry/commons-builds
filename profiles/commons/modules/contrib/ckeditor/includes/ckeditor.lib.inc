@@ -1191,6 +1191,9 @@ function ckeditor_load_by_field($field, $format, $show_toggle = TRUE, $add_field
     return $field;
   }
 
+  // Attach the editor css.
+  $field['#attached']['css'][] = drupal_get_path('module', 'ckeditor') . '/css/ckeditor.editor.css';
+
   if ($settings) {
     $textarea_id = $field['#id'];
     $class[] = 'ckeditor-mod';
