@@ -28,7 +28,6 @@ dependencies[] = taxonomy
 ; commons_media module post install will enable all of the media modules.
 dependencies[] = addressfield
 dependencies[] = addressfield_tokens
-dependencies[] = advancedqueue
 dependencies[] = breakpoints
 dependencies[] = ckeditor
 dependencies[] = ctools
@@ -122,9 +121,9 @@ dependencies[] = commons_wysiwyg
 ; System Requirements.
 php_memory_limit = 128M
 
-; Information added by Drupal.org packaging script on 2014-01-16
-version = "7.x-3.8"
+; Information added by Drupal.org packaging script on 2014-02-12
+version = "7.x-3.9"
 core = "7.x"
 project = "commons"
-datestamp = "1389902308"
+datestamp = "1392234217"
 

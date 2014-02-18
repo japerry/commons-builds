@@ -246,13 +246,6 @@ function ckeditor_get_version($main_version = FALSE) {
 }
 
 /**
- * Implementation of hook_init().
- */
-function ckeditor_init() {
-  drupal_add_css(drupal_get_path('module', 'ckeditor') . '/ckeditor.css');
-}
-
-/**
  * Implements hook_form_FORM_ID_alter() for user_profile_form().
  */
 function ckeditor_form_user_profile_form_alter(&$form, &$form_state) {
