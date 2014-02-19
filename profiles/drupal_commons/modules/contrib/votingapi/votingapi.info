@@ -7,5 +7,5 @@ core = 6.x
 version = "6.x-2.3+9-dev"
 core = "6.x"
 project = "votingapi"
-datestamp = "1392832640"
+datestamp = "1392833425"
 

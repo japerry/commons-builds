@@ -10,7 +10,7 @@ projects[admin][version] = "2.0"
 ; Historically Commons placed Acquia connector in the Acquia subdirectory.
 ; Leaving it there to simplify the upgrade process.
 projects[acquia_connector][subdir] = "acquia"
-projects[acquia_connector][version] = "2.13"
+projects[acquia_connector][version] = "2.14"
 
 projects[apachesolr][type] = "module"
 projects[apachesolr][version] = "1.8"
@@ -92,7 +92,7 @@ projects[editablefields][patch][] = "http://drupal.org/files/issues/editablefiel
 projects[features][subdir] = "contrib"
 
 projects[filefield][subdir] = "contrib"
-projects[filefield][version] = "3.11"
+projects[filefield][version] = "3.12"
 
 projects[flag][subdir] = "contrib"
 projects[flag][version] = "1.5"
@@ -103,6 +103,7 @@ projects[getid3][subdir] = "contrib"
 
 
 libraries[getid3][download][type] = "get"
+libraries[getid3][type] = "libraries"
 libraries[getid3][destination] = "libraries"
 libraries[getid3][download][url] = "http://downloads.sourceforge.net/project/getid3/getID3%28%29%201.x/1.9.1/getid3-1.9.1-20110810.zip?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fgetid3%2Ffiles%2FgetID3%2528%2529%25201.x%2F1.9.1%2F&ts=1320871534"
 libraries[getid3][directory_name] = "getid3"
@@ -134,6 +135,7 @@ projects[invite][version] = "2.0-beta3"
 projects[jquery_ui][subdir] = "contrib"
 
 libraries[jquery_ui][download][type] = "get"
+libraries[jquery_ui][type] = "libraries"
 libraries[jquery_ui][destination] = "modules/contrib/jquery_ui"
 libraries[jquery_ui][download][url] = "http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip"
 libraries[jquery_ui][directory_name] = "jquery.ui"
@@ -216,7 +218,7 @@ projects[rules][patch][] = "http://drupal.org/files/issues/rules.rules_defaults_
 projects[strongarm][subdir] = "contrib"
 
 projects[tagadelic][subdir] = "contrib"
-projects[tagadelic][version] = "1.3"
+projects[tagadelic][version] = "1.5"
 
 projects[tagadelic_views][subdir] = "contrib"
 projects[tagadelic_views][version] = "1.2"
@@ -293,6 +295,7 @@ projects[wysiwyg][download][revision] = "ddfaf684a45eb2ba3e4f866e5e5e6e1c10c8c02
 projects[wysiwyg][subdir] = "contrib"
 
 libraries[ckeditor][download][type] = "get"
+libraries[ckeditor][type] = "libraries"
 libraries[ckeditor][destination] = "libraries"
 libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.2/ckeditor_3.6.2.tar.gz"
 libraries[ckeditor][directory_name] = "ckeditor"
@@ -335,9 +338,9 @@ projects[mailcomment][version] = "1.0"
 
 ; Modules no longer in use, to be removed in a future release:
 
-projects[homebox][subdir] = "contrib"
-projects[shoutbox][subdir] = "contrib"
-projects[image][subdir] = "contrib"
+;projects[homebox][subdir] = "contrib"
+;projects[shoutbox][subdir] = "contrib"
+;projects[image][subdir] = "contrib"
 
 ; Themes:
 

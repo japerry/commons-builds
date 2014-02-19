@@ -10,5 +10,5 @@ package = Views
 version = "6.x-2.2+8-dev"
 core = "6.x"
 project = "views_attach"
-datestamp = "1392832641"
+datestamp = "1392833427"
 
