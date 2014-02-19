@@ -7,9 +7,9 @@ dependencies[] = user_badges
 core = 6.x
 
 
-; Information added by drush on 2013-12-06
+; Information added by drush on 2014-02-19
 version = "6.x-1.0-beta1+3-dev"
 core = "6.x"
 project = "userpoints_contrib"
-datestamp = "1386288397"
+datestamp = "1392832597"
 

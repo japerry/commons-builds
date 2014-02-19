@@ -6,9 +6,9 @@ suggests[] = token
 package = Views
 
 
-; Information added by drush on 2013-12-06
+; Information added by drush on 2014-02-19
 version = "6.x-2.2+8-dev"
 core = "6.x"
 project = "views_attach"
-datestamp = "1386288441"
+datestamp = "1392832641"
 

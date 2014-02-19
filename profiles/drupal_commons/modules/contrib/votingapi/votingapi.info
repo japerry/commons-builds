@@ -3,9 +3,9 @@ description = Provides a shared voting API for other modules.
 package = Voting
 core = 6.x
 
-; Information added by drush on 2013-12-06
+; Information added by drush on 2014-02-19
 version = "6.x-2.3+9-dev"
 core = "6.x"
 project = "votingapi"
-datestamp = "1386288440"
+datestamp = "1392832640"
 
