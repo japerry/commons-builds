@@ -587,13 +587,13 @@ function og_field_access($op, $field, $entity_type, $entity, $account) {
 
   $field_name = $field['field_name'];
   list($id, $vid, $bundle_name) = entity_extract_ids($entity_type, $entity);
+  $instance = field_info_instance($entity_type, $field_name, $bundle_name);
   if ($field_name == OG_GROUP_FIELD) {
     $wrapper = entity_metadata_wrapper($entity_type, $entity);
     if ($wrapper->getIdentifier() && !$wrapper->{OG_GROUP_FIELD}->value()) {
       // Entity isn't an active group.
       return;
     }
-    $instance = field_info_instance($entity_type, $field_name, $bundle_name);
     if (!empty($instance['widget']['settings']['og_hide'])) {
       return FALSE;
     }
@@ -609,6 +609,10 @@ function og_field_access($op, $field, $entity_type, $entity, $account) {
 
   // Check if we are editing the user entity.
   if ($entity_type == 'user') {
+    if (!empty($instance['settings']['behaviors']['og_widget']['access_override'])) {
+      return;
+    }
+
     return user_access('administer group', $account);
   }
 }
@@ -978,9 +982,9 @@ function _og_update_entity_fields($entity_type, $entity) {
       }
     }
     else {
-      foreach ($wrapper->{$field_name . '__og_membership'}->value() as $og_membership) {
-        $gids[] = $og_membership->gid;
-      }
+      $target_type = $field['settings']['target_type'];
+      $gids = og_get_entity_groups($entity_type, $entity, array(), $field_name);
+      $gids = !empty($gids[$target_type]) ? $gids[$target_type] : array();
     }
     if ($gids) {
       $wrapper->{$field_name}->set($gids);
@@ -1413,7 +1417,7 @@ function og_entity_query_alter(EntityFieldQuery $query) {
 }
 
 /**
- * Implements hook_query_QUERY_TAG_alter().
+ * Implements hook_query_TAG_alter().
  *
  * Join the {og_membership} table and alter the query.
  */
@@ -1523,7 +1527,28 @@ function og_query_og_membership_alter(QueryAlterableInterface $query) {
     $tables = array_merge(array('ogm' => $ogm), $tables);
   }
   else {
-    $query->join('og_membership', 'ogm', "ogm.etid = $base_table_alias.entity_id");
+    // If the original EntityFieldQuery has an entity type entityCondition,
+    // restrict the join by this. Otherwise, we would bring in the IDs of
+    // entities of other types if they happen to match on the base table entity
+    // ID.
+    $query_base_entity_type = $query->alterMetaData['entity_field_query']->entityConditions['entity_type']['value'];
+    if (empty($query_base_entity_type)) {
+      // It's possible to have no entity type specified: join without it.
+      $query->join('og_membership', 'ogm', "ogm.etid = $base_table_alias.entity_id");
+    }
+    else {
+      if (is_array($query_base_entity_type)) {
+        // It's also possible for the entity type to be multiple.
+        $query->join('og_membership', 'ogm', "ogm.etid = $base_table_alias.entity_id AND ogm.entity_type IN (:entity_type)", array(
+          ':entity_type' => $query_base_entity_type,
+        ));
+      }
+      else {
+        $query->join('og_membership', 'ogm', "ogm.etid = $base_table_alias.entity_id AND ogm.entity_type = :entity_type", array(
+          ':entity_type' => $query_base_entity_type,
+        ));
+      }
+    }
   }
 
   _og_query_og_membership_alter_conditions($conditions, $aliases, $base_table_alias, $entity_info);
@@ -2066,6 +2091,9 @@ function og_group($group_type, $gid, $values = array(), $save_created = TRUE) {
   }
 
   if (empty($og_membership->is_new) || $save_created) {
+    // Pass the entity object along to OgMembership::save() so we don't have
+    // to reload it.
+    $og_membership->entity = $entity;
     // Save the membership for update, or if the OG membership is new when
     // "save-created" is TRUE.
     $og_membership->save();
