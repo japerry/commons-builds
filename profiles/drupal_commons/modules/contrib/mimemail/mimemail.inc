@@ -161,7 +161,7 @@ function _mimemail_file($url = NULL, $content = NULL, $name = '', $type = '', $d
             _mimemail_imagecache($url);
         }
         // Download method is private, and the URL needs conversion.
-        if (variable_get('file_downloads', FILE_DOWNLOADS_PUBLIC) == FILE_DOWNLOADS_PRIVATE && strpos($url, 'system/files/') !== FALSE) {
+        if (variable_get('file_downloads', FILE_DOWNLOADS_PUBLIC) == FILE_DOWNLOADS_PRIVATE && strpos($url, 'system/files/') !== 0) {
           $file = file_create_path(drupal_substr($url, (strpos($url, 'system/files/') + drupal_strlen('system/files/'))));
         }
         // Download method is public.
@@ -267,7 +267,10 @@ function _mimemail_imagecache($url) {
  *   - body: A string containing the mime encoded multipart body of a mail.
  */
 function mimemail_multipart_body($parts, $content_type = 'multipart/mixed; charset=utf-8', $sub_part = FALSE) {
-  $boundary = md5(uniqid(time(), TRUE));
+  // Control variable to avoid boundary collision.
+  static $part_num = 0;
+
+  $boundary = sha1(uniqid(time(), TRUE)) . $part_num++;
   $body = '';
 
   $headers = array(

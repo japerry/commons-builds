@@ -51,9 +51,9 @@ features[views_api][] = "api:2"
 name = "Commons Blog"
 package = "Commons"
 
-; Information added by Drupal.org packaging script on 2014-02-19
-version = "6.x-2.16"
+; Information added by Drupal.org packaging script on 2014-04-25
+version = "6.x-2.17"
 core = "6.x"
 project = "commons"
-datestamp = "1392793711"
+datestamp = "1398410329"
 
