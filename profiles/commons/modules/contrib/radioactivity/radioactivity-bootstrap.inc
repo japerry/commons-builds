@@ -85,18 +85,10 @@ function _radioactivity_require_bootstrapping() {
 }
 
 /**
- * Internal function to filter nested arrays().
- * @param type $array
- */
-function _radioactivity_filter_nested_array($array) {
-  return !is_array($array) ? TRUE : FALSE;
-}
-
-/**
  * Generate a checksum for given data
  */
 function _radioactivity_checksum_generate($data) {
-  $temp = array_filter($data, "_radioactivity_filter_nested_array");
+  $temp = $data;
   unset($temp['checksum']);
   ksort($temp);
   $temp = join(',', $temp);

@@ -57,7 +57,7 @@ class RadioactivityRedisIncidentStorage extends RadioactivityIncidentStorage {
     }
     while ($i < $to) {
       $incident = unserialize($rc->get("radioactivity_incident_" . $i));
-      if ($incident && $incident->floodCheck()) {
+      if ($incident->floodCheck()) {
         $incident->updateEnergy();
       }
       $i++;

@@ -2,22 +2,17 @@
 Drupal.behaviors.radioactivity = {
 
   config: '',
-  attached: false,
-  activeIncidents: [],
+  activeIncidents: Array(),
 
   attach: function (context, settings) {
 
-    // Skip if radioactivity is not set
-    if (typeof settings.radioactivity == 'undefined') {
-      return;
-    }
-
+    // Do an ajax callback to the given callback address {
+    var data = settings.radioactivity.emitters;
     var config = settings.radioactivity.config;
-    var emitters = settings.radioactivity.emitters;
-    
+
     this.config = config;
 
-    $.each(emitters, function(callback, incidents) {
+    $.each(data, function(callback, incidents) {
 
       // Accuracy and  flood filtering
       $.each(incidents, function(index, incident) {
@@ -53,8 +48,6 @@ Drupal.behaviors.radioactivity = {
       // Call the emitter callback
       if (Drupal.behaviors.radioactivity.activeIncidents.length > 0) {
         Drupal.behaviors.radioactivity[callback](Drupal.behaviors.radioactivity.activeIncidents);
-        // Clear incidents
-        Drupal.behaviors.radioactivity.activeIncidents = [];
       }
     });
   },

@@ -327,14 +327,18 @@ function radioactivity_field_formatter_settings_summary($field, $instance, $view
 }
 
 /**
- * Update emitters on page
- * @param $ajax boolean
- * @return false|array
+ * Implements hook_page_alter()
  */
-function radioactivity_update_emitters($ajax = FALSE) {
+function radioactivity_page_alter($page) {
+  radioactivity_update_emitters();
+}
 
-  $data = FALSE;
+/**
+ * Update emitters on page
+ */
+function radioactivity_update_emitters() {
 
+  // foreach emitters emitter->emit();
   $register = _radioactivity_register_emitter();
   module_load_include("inc", "radioactivity", "radioactivity-bootstrap");
   $path = base_path() . drupal_get_path('module', 'radioactivity') . '/emit.php';
@@ -346,24 +350,12 @@ function radioactivity_update_emitters($ajax = FALSE) {
   );
 
   if (count($register) > 0) {
-    if ($ajax) {
-      $data = array(
-        'emitters' => $register,
-        'config' => $config,
-      );
-    } else {
-      drupal_add_library('system', 'jquery.cookie');
-      drupal_add_js(drupal_get_path('module', 'radioactivity') . '/js/radioactivity.js');
-      drupal_add_js(array('radioactivity' => array('emitters' => $register)), 'setting');
-      drupal_add_js(array('radioactivity' => array('config' => $config)), 'setting');
-    }
+    drupal_add_library('system', 'jquery.cookie');
+    drupal_add_js(drupal_get_path('module', 'radioactivity') . '/js/radioactivity.js');
+    drupal_add_js(array('radioactivity' => array('emitters' => $register)), 'setting');
+    drupal_add_js(array('radioactivity' => array('config' => $config)), 'setting');
   }
-
   _radioactivity_register_emitter('RESET');
-
-  if ($data) {
-    return $data;
-  }
 }
 
 /**
