@@ -33,6 +33,10 @@ projects[apachesolr_og][download][url] = "http://git.drupal.org/project/apacheso
 projects[apachesolr_og][download][branch] = "7.x-1.x"
 projects[apachesolr_og][download][revision] = "49820b4a4fcff7c1c4efe449da033fb6d8711ac5"
 
+; Check the user object before trying to display a result.
+; https://drupal.org/node/2077281#comment-7807937
+projects[apachesolr_og][patch][] = "https://drupal.org/files/issues/apachesolr_og-check-for-anonymous.patch"
+
 projects[apachesolr_proximity][type] = "module"
 projects[apachesolr_proximity][subdir] = "contrib"
 projects[apachesolr_proximity][version] = "1.0-rc1"
@@ -121,7 +125,10 @@ projects[elements][version] = "1.4"
 
 projects[email_registration][type] = "module"
 projects[email_registration][subdir] = "contrib"
-projects[email_registration][version] = "1.2"
+projects[email_registration][download][type] = "git"
+projects[email_registration][download][url] = "http://git.drupal.org/project/email_registration.git"
+projects[email_registration][download][branch] = "7.x-1.x"
+projects[email_registration][download][revision] = "1656416"
 
 projects[entity][type] = "module"
 projects[entity][subdir] = "contrib"
@@ -211,7 +218,7 @@ projects[libraries][version] = "2.2"
 
 projects[lingotek][type] = "module"
 projects[lingotek][subdir] = "contrib"
-projects[lingotek][version] = "5.04"
+projects[lingotek][version] = "5.06"
 
 projects[link][type] = "module"
 projects[link][subdir] = "contrib"
@@ -270,7 +277,7 @@ projects[module_filter][version] = "1.8"
 
 projects[mollom][type] = "module"
 projects[mollom][subdir] = "contrib"
-projects[mollom][version] = "2.9"
+projects[mollom][version] = "2.10"
 
 projects[navbar][type] = "module"
 projects[navbar][subdir] = "contrib"
@@ -300,10 +307,7 @@ projects[oembed][download][revision] = "9aa5303"
 
 projects[og][type] = "module"
 projects[og][subdir] = "contrib"
-projects[og][download][type] = "git"
-projects[og][download][url] = "http://git.drupal.org/project/og.git"
-projects[og][download][branch] = "7.x-2.x"
-projects[og][download][revision] = "10647461ce6"
+projects[og][version] = "2.7"
 
 ; Auto-assign role to group manager broken on groups with overridden roles.
 ; https://drupal.org/node/2005800#comment-7684873
@@ -426,7 +430,7 @@ projects[rich_snippets][version] = "1.0-beta3"
 
 projects[rules][type] = "module"
 projects[rules][subdir] = "contrib"
-projects[rules][version] = "2.6"
+projects[rules][version] = "2.7"
 
 projects[schemaorg][type] = "module"
 projects[schemaorg][subdir] = "contrib"
@@ -560,7 +564,7 @@ libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/ar
 
 libraries[timeago][download][type] = "get"
 libraries[timeago][type] = "libraries"
-libraries[timeago][download][url] = "https://raw.github.com/rmm5t/jquery-timeago/v1.4.0/jquery.timeago.js"
+libraries[timeago][download][url] = "https://raw.github.com/rmm5t/jquery-timeago/v1.4.1/jquery.timeago.js"
 
 libraries[underscore][download][type] = "get"
 libraries[underscore][type] = "libraries"

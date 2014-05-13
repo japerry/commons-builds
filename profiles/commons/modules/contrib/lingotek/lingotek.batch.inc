@@ -29,8 +29,9 @@ function lingotek_field_language_data_cleanup_batch_create($entity_type, $autose
   // undefined to the source language.
   $query1 = new EntityFieldQuery();
   $entities1 = $query1->entityCondition('entity_type', $entity_type)
-      ->propertyCondition('language', 'und', '=')
+      ->propertyCondition('language', LANGUAGE_NONE, '=')
       ->execute();
+  unset($query1);
   if (isset($entities1[$entity_type])) {
     foreach ($entities1[$entity_type] as $entity) {
       $entity_id = $entity->{$info['entity keys']['id']};
@@ -44,6 +45,7 @@ function lingotek_field_language_data_cleanup_batch_create($entity_type, $autose
   $query2 = new EntityFieldQuery();
   $entities2 = $query2->entityCondition('entity_type', $entity_type)
       ->execute();
+  unset($query2);
   if (isset($entities2[$entity_type])) {
     foreach ($entities2[$entity_type] as $entity) {
       $entity_id = $entity->{$info['entity keys']['id']};
@@ -54,7 +56,7 @@ function lingotek_field_language_data_cleanup_batch_create($entity_type, $autose
   }
 
   // Add missing URL aliases
-  $query = db_select('url_alias', 'ua')
+  $query = db_select('{url_alias}', 'ua')
       ->fields('ua', array('source'))
       ->condition('ua.source', "$entity_type/%", 'LIKE')
       ->condition('ua.language', LANGUAGE_NONE)
@@ -193,7 +195,7 @@ function lingotek_get_sync_download_batch_elements($download_targets = NULL, $sy
 
       // get all nodes that have pending translations
       $key = 'target_sync_status_' . $lingotek_locale;
-      $query = db_select('lingotek_entity_metadata', 'l')->fields('l');
+      $query = db_select('{lingotek_entity_metadata}', 'l')->fields('l');
       $query->condition('entity_type', 'node');
       $query->condition('entity_key', $key);
       $status_or = db_or()
@@ -206,7 +208,7 @@ function lingotek_get_sync_download_batch_elements($download_targets = NULL, $sy
       }
       // get all config chunks that have pending translations
       $key = 'target_sync_status_' . $lingotek_locale;
-      $query = db_select('lingotek_config_metadata', 'meta')->fields('meta');
+      $query = db_select('{lingotek_config_metadata}', 'meta')->fields('meta');
       $query->condition('config_key', $key);
       $status_or = db_or()
         ->condition('value', LingotekSync::STATUS_PENDING)
@@ -267,7 +269,6 @@ function lingotek_batch_disassociate_content() {
   $operations[] = array('lingotek_batch_disassociate_content_worker', array($api, $doc_ids));
 
 
-  $operations[] = array('LingotekSync::disassociateAllNodes', array());
   $operations[] = array('LingotekSync::disassociateAllEntities', array());
   $operations[] = array('LingotekSync::disassociateAllChunks', array());
   drupal_set_message(t('All local translations have been disassociated from Lingotek.'));
@@ -392,20 +393,21 @@ function lingotek_sync_download_target_finished($success, $results, $operations)
  */
 function lingotek_source_language_cleanup_batch_worker($entity_type, $entity_id, $source_language, &$context) {
 
-  $context['message'] = t("Setting language for @entity_type #@id to '@source_language", array('@entity_type' => $entity_type, '@id' => $entity_id, '@source_language' => $source_language));
+  $context['message'] = t("Setting language for @entity_type #@id to '@source_language'", array('@entity_type' => $entity_type, '@id' => $entity_id, '@source_language' => $source_language));
 
   $loaded_entity = lingotek_entity_load_single($entity_type, $entity_id);
   $info = entity_get_info($entity_type);
-  if (!empty($info['entity keys']['language']) && isset($loaded_entity->{$info['entity keys']['language']})) {
-    $loaded_entity->{$info['entity keys']['language']} = $source_language;
+  // Default to string 'language' if no language-related entity key is found.
+  $language_field = !empty($info['entity keys']['language']) ? $info['entity keys']['language'] : 'language';
+  if (isset($loaded_entity->$language_field) && $loaded_entity->$language_field != $source_language) {
+    $loaded_entity->$language_field = $source_language;
+    $loaded_entity->lingotek_upload_override = FALSE; // Set 0 : Ensure that uploading does not occur. Set 1 : Force uploading to occur
+    entity_save($entity_type, $loaded_entity);
+    if (!isset($context['results']['entity_cleanup'])) {
+      $context['results']['entity_cleanup'] = 0;
+    }
+    $context['results']['entity_cleanup'] ++;
   }
-  $loaded_entity->lingotek_upload_override = FALSE; // Set 0 : Ensure that uploading does not occur. Set 1 : Force uploading to occur
-  entity_save($entity_type, $loaded_entity);
-
-  if (!isset($context['results']['entity_cleanup'])) {
-    $context['results']['entity_cleanup'] = 0;
-  }
-  $context['results']['entity_cleanup'] ++;
 }
 
 /**
@@ -480,9 +482,10 @@ function lingotek_field_language_data_cleanup_update_entity($entity_type, $entit
   }
   $info = entity_get_info($entity_type);
   $label_field = $info['entity keys']['label'];
-  $language_field = $info['entity keys']['language'];
+  // Use 'language' as a fallback in case the entity doesn't give lang field.
+  $language_field = isset($info['entity keys']['language']) ? $info['entity keys']['language'] : 'language';
   $context['message'] = t('Preparing translatable content for @entity_type: @entity_title', array('@entity_type' => $entity_type, '@entity_title' => $entity->$label_field));
-  if (entity_language($entity_type, $entity) != 'und') {
+  if ($entity->$language_field != 'und') {
     $translatable_fields = lingotek_translatable_fields();
     foreach ($translatable_fields as $field_name) {
       if (!empty($entity->{$field_name}['und']) && empty($entity->{$field_name}[$entity->{$language_field}])) {

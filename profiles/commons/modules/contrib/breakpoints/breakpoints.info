@@ -6,9 +6,9 @@ files[] = breakpoints.module
 files[] = breakpoints.test
 configure = admin/config/media/breakpoints
 
-; Information added by drush on 2014-04-26
+; Information added by drush on 2014-05-08
 version = "7.x-1.1+1-dev"
 core = "7.x"
 project = "breakpoints"
-datestamp = "1398473347"
+datestamp = "1399579147"
 

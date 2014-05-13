@@ -135,8 +135,12 @@ function email_registration_form_user_pass_alter(&$form, &$form_state) {
  * Implements hook_form_FORM_ID_alter().
  */
 function email_registration_form_user_login_alter(&$form, &$form_state) {
-  $form['name']['#title'] = t('E-mail');
-  $form['name']['#description'] = t('Enter your e-mail address.');
+  $form['name']['#title'] = variable_get('email_registration_login_with_username', TRUE)
+    ? t('E-mail or username')
+    : t('E-mail');
+  $form['name']['#description'] = variable_get('email_registration_login_with_username', TRUE)
+      ? t('Enter your e-mail address or username.')
+      : t('Enter your e-mail address.');
   $form['name']['#element_validate'][] = 'email_registration_user_login_validate';
   $form['pass']['#description'] = t('Enter the password that accompanies your e-mail.');
 }
@@ -145,9 +149,34 @@ function email_registration_form_user_login_alter(&$form, &$form_state) {
  * Implements hook_form_FORM_ID_alter().
  */
 function email_registration_form_user_login_block_alter(&$form, &$form_state) {
-  $form['name']['#title'] = t('E-mail');
+  $form['name']['#title'] = variable_get('email_registration_login_with_username', TRUE)
+    ? t('E-mail or username')
+    : t('E-mail');
   $form['name']['#element_validate'][] = 'email_registration_user_login_validate';
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function email_registration_form_user_admin_settings_alter(&$form, &$form_state) {
+  $form['registration_cancellation']['email_registration_login_with_username'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Allow users login with e-mail or username.'),
+    '#description' => t('Allow users to login with their username in addition to their e-mail.'),
+    '#default_value' => variable_get('email_registration_login_with_username', TRUE),
+    );
+  $form['#submit'][] = 'email_registration_form_user_admin_settings_submit';
+}
+
+/**
+ * Submit function for user_admin_settings to save our variable.
+ *
+ * @see email_registration_form_user_admin_settings_alter().
+ */
+function email_registration_form_user_admin_settings_submit($form, &$form_state) {
+  variable_set('email_registration_login_with_username', $form_state['values']['email_registration_login_with_username']);
+}
+
 
 /**
  * Form element validation handler for the user login form.
@@ -158,8 +187,24 @@ function email_registration_user_login_validate($form, &$form_state) {
   if (isset($form_state['values']['name'])) {
     // Keep the email value in form state for further validation.
     $form_state['values']['email'] = $form_state['values']['name'];
-    if ($name = db_query('SELECT name FROM {users} WHERE LOWER(mail) = LOWER(:name)', array(':name' => $form_state['values']['name']))->fetchField()) {
+
+    // First, assume that the given value is an e-mail, and try to load the
+    // username matching it, if any.
+    $name = db_query('SELECT name FROM {users} WHERE LOWER(mail) = LOWER(:name)', array(':name' => $form_state['values']['name']))->fetchField();
+    if (!empty($name)) {
+      // If the name matches an e-mail, assume that it's the desired name and
+      // set the username in the form values.
       $form_state['values']['name'] = $name;
+    }
+    elseif (!variable_get('email_registration_login_with_username', TRUE)) {
+      // If no username was found for the e-mail, and registration with username
+      // is not allowed, unset the name from the form. This prevents
+      // user_login_authenticate_validate() from trying to load a user from the
+      // value as a username, which in turn causes user_login_final_validate()
+      // to set a form error telling the user that no account has been found.
+      // We have to set this to NULL rather than FALSE, because
+      // user_login_name_validate() uses isset() rather than empty().
+      $form_state['values']['name'] = NULL;
     }
   }
 }
