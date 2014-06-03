@@ -53,9 +53,9 @@ features_exclude[field][message-trusted_contact_request_approved-field_approving
 features_exclude[field][message-trusted_contact_request_pending-field_requesting_user] = message-trusted_contact_request_pending-field_requesting_user
 files[] = views/handlers/commons_groups_handler_send_message.inc
 
-; Information added by Drupal.org packaging script on 2014-05-08
-version = "7.x-3.12"
+; Information added by Drupal.org packaging script on 2014-05-22
+version = "7.x-3.13"
 core = "7.x"
 project = "commons"
-datestamp = "1399579131"
+datestamp = "1400787228"
 

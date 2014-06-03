@@ -13,7 +13,7 @@ projects[addressfield][version] = "1.0-beta5"
 
 projects[addressfield_tokens][type] = "module"
 projects[addressfield_tokens][subdir] = "contrib"
-projects[addressfield_tokens][version] = "1.3"
+projects[addressfield_tokens][version] = "1.4"
 
 projects[admin_icons][type] = "module"
 projects[admin_icons][subdir] = "contrib"
@@ -87,7 +87,8 @@ projects[ctools][subdir] = "contrib"
 projects[ctools][download][type] = "git"
 projects[ctools][download][url] = "http://git.drupal.org/project/ctools.git"
 projects[ctools][download][branch] = "7.x-1.x"
-projects[ctools][download][revision] = "e720f61d"
+projects[ctools][download][revision] = "6e034cb9"
+projects[ctools][patch][] = "https://drupal.org/files/issues/missing-ctools-version-2269747-1.patch"
 
 projects[custom_search][type] = "module"
 projects[custom_search][subdir] = "contrib"
@@ -178,6 +179,10 @@ projects[flag][version] = "2.2"
 ; http://drupal.org/node/1965760
 projects[flag][patch][] = "https://drupal.org/files/issues/1965760.29.flag_.entity-tokens.patch"
 
+; Provide a hook to allow default flag definitions to be altered.
+; https://drupal.org/node/2027091#comment-8012263
+projects[flag][patch][] = "https://drupal.org/files/flag-default-flags-alter-hook-2027091-03.patch"
+
 projects[flag_abuse][type] = "module"
 projects[flag_abuse][subdir] = "contrib"
 projects[flag_abuse][version] = "2.0"
@@ -218,7 +223,7 @@ projects[libraries][version] = "2.2"
 
 projects[lingotek][type] = "module"
 projects[lingotek][subdir] = "contrib"
-projects[lingotek][version] = "5.06"
+projects[lingotek][version] = "5.07"
 
 projects[link][type] = "module"
 projects[link][subdir] = "contrib"
@@ -266,6 +271,7 @@ projects[message_notify][version] = "2.5"
 projects[message_subscribe][type] = "module"
 projects[message_subscribe][subdir] = "contrib"
 projects[message_subscribe][version] = "1.0-rc2"
+projects[message_subscribe][patch][] = "https://drupal.org/files/issues/group-context-1828184-53.patch"
 
 projects[metatag][type] = "module"
 projects[metatag][subdir] = "contrib"
@@ -304,6 +310,10 @@ projects[oembed][download][type] = "git"
 projects[oembed][download][url] = "http://git.drupal.org/project/oembed.git"
 projects[oembed][download][branch] = "7.x-1.x"
 projects[oembed][download][revision] = "9aa5303"
+
+; Remove the media submodule as it conflicts with the Media: oEmbed module.
+; https://drupal.org/node/2269745#comment-8796261
+projects[oembed][patch][] = "https://drupal.org/files/issues/remove-media-submodule-2269745-2.patch"
 
 projects[og][type] = "module"
 projects[og][subdir] = "contrib"
@@ -481,11 +491,11 @@ projects[variable][version] = "2.5"
 
 projects[views][type] = "module"
 projects[views][subdir] = "contrib"
-projects[views][version] = "3.7"
+projects[views][version] = "3.8"
 
 ; Update Views Content access filter per core performance improvements.
 ; https://drupal.org/comment/8516039#comment-8516039
-projects[views][patch][] = "https://drupal.org/files/issues/2204257-views-content-access-filter-core-depends-on-core-patch.patch"
+projects[views][patch][] = "https://drupal.org/files/issues/views-content_access_filter_per_core_performance-2204257-4_0.patch"
 
 projects[views_bulk_operations][type] = "module"
 projects[views_bulk_operations][subdir] = "contrib"

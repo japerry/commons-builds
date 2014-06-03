@@ -23,7 +23,7 @@ class views_handler_filter_node_access extends views_handler_filter {
   function query() {
     if (!user_access('administer nodes') && module_implements('node_grants')) {
       $table = $this->ensure_my_table();
-      $grants = static::buildGrantsQueryCondition(node_access_grants('view'));
+      $grants = node_add_node_grants_to_query(node_access_grants('view'));
 
       $this->query->add_where('AND', $grants);
       $this->query->add_where('AND', $table . '.grant_view', 1, '>=');

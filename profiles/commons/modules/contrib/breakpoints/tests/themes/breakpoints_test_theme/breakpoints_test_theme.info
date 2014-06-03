@@ -10,9 +10,9 @@ breakpoints[wide] = (min-width: 851px)
 breakpoints[tv] = only screen and (min-width: 3456px)
 
 
-; Information added by drush on 2014-05-08
+; Information added by drush on 2014-05-22
 version = "7.x-1.1+1-dev"
 core = "7.x"
 project = "breakpoints"
-datestamp = "1399579147"
+datestamp = "1400787244"
 
