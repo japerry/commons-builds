@@ -34,7 +34,7 @@ function password_policy_admin_settings() {
     '#type' => 'radios',
     '#title' => t('Blocking expired accounts'),
     '#default_value' => variable_get('password_policy_block', 0),
-    '#options' => array('0' => t('Expired accounts are blocked. Only administrators can unblock them.'), '1' => t('The user with expired account is not blocked, but sent to a change password page. If the password is not changed, the account is blocked and the user cannot login again.')),
+    '#options' => array('0' => t('Expired accounts are blocked. Only administrators can unblock them. Users whose accounts have expired will be forced to change their passwords at next login (after being unblocked).'), '1' => t('Expired accounts are not blocked. Users whose accounts have expired will be forced to change their passwords at next login.')),
   );
 
   // Visibility
@@ -112,6 +112,15 @@ function password_policy_admin_settings_submit($form, &$form_state) {
   }
 }
 
+/**
+ * Lists roles to which a policy applies.
+ *
+ * @param $pid
+ *   Policy id.
+ *
+ * @return
+ *   Array of role names.
+ */
 function _password_policy_admin_list_roles($pid) {
   $roles = array();
   $result = db_query('SELECT r.name FROM {role} r INNER JOIN {password_policy_role} p ON r.rid = p.rid WHERE p.pid = %d', $pid);
@@ -149,12 +158,14 @@ function password_policy_admin_list() {
 }
 
 /**
- * Submit hook for the form on the default list view for the password policy module.
+ * Submit hook for the form on the default list view for the password policy
+ * module.
  */
 function password_policy_admin_list_submit($form, &$form_state) {
   foreach ($form_state['values']['enabled'] as $pid => $enabled) {
     db_query("UPDATE {password_policy} SET weight = %d WHERE pid = %d", $form_state['values']['weight'][$pid], $pid);
-    // Ensure we don't reset the timestamp on policies that are already enabled.
+    // Ensure we don't reset the timestamp on policies that are already
+    // enabled.
     if ($enabled) {
       db_query("UPDATE {password_policy} SET enabled = 1, created = %d WHERE pid = %d AND enabled = 0", time(), $pid);
     }
@@ -341,8 +352,8 @@ function password_policy_admin_form_submit($form, &$form_state) {
 }
 
 /**
- * Confirmation form for the deletion of a password policy.  Deletion takes place
- * in password_policy_admin_delete_submit().
+ * Confirmation form for the deletion of a password policy.  Deletion takes
+ * place in password_policy_admin_delete_submit().
  */
 function password_policy_admin_delete($form_state, $pid) {
   if (is_numeric($pid) && $policy = _password_policy_load_policy_by_pid($pid)) {
@@ -385,14 +396,14 @@ function password_policy_password_change_settings() {
     '#type' => 'checkboxes',
     '#options' => $roles,
     '#title' => t('Force users in the following roles to change their password'),
-    '#description' => t('Users who are not signed in will be required to change their password immediately upon sign in. Users who are currently signed in will be required to change their password upon their next page click, but after changing their password will be redirected back to the page they were attempting to access.'),
+    '#description' => t('Users who are not logged in will be required to change their password immediately upon login. Users who are currently logged in will be required to change their password upon their next page request, but after changing their password will be redirected back to the page they were attempting to access.'),
   );
 
   $form['password_policy_exclude_pages'] = array(
     '#title' => t('Page Exclusion List'),
     '#type' => 'textarea',
     '#description' => t('The user will be able to access these pages without changing their password. This should always include the logout path.'),
-    '#default_value' => variable_get('password_policy_exclude_pages', 'logout'),  
+    '#default_value' => variable_get('password_policy_exclude_pages', 'logout'),
     '#wysiwyg' => FALSE,
   );
 
@@ -435,8 +446,10 @@ function password_policy_password_change_settings_submit($form, &$form_state) {
         $uids[] = $uid;
       }
     }
-    $sql = 'UPDATE {password_policy_force_change} SET force_change = 1 WHERE uid IN (' . db_placeholders($uids, 'int') . ')';
-    db_query($sql, $uids);
+    if (!empty($uids)) {
+      $sql = 'UPDATE {password_policy_force_change} SET force_change = 1 WHERE uid IN (' . db_placeholders($uids, 'int') . ')';
+      db_query($sql, $uids);
+    }
     $selected_roles[] = $role;
   }
   if (count($selected_roles)) {
@@ -453,4 +466,3 @@ function password_policy_password_change_settings_submit($form, &$form_state) {
     drupal_set_message(t('No roles were selected.'));
   }
 }
-

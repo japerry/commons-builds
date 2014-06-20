@@ -13,9 +13,9 @@ features[user_permission][] = "administer rules"
 name = "Commons Admin"
 package = "Commons"
 
-; Information added by Drupal.org packaging script on 2014-04-25
-version = "6.x-2.17"
+; Information added by Drupal.org packaging script on 2014-06-20
+version = "6.x-2.18"
 core = "6.x"
 project = "commons"
-datestamp = "1398410329"
+datestamp = "1403301231"
 

@@ -2,10 +2,9 @@ name = Voting API
 description = Provides a shared voting API for other modules.
 package = Voting
 core = 6.x
-
-; Information added by drush on 2014-04-25
+; Information added by drupal.org packaging script on 2013-10-19
 version = "6.x-2.3+9-dev"
 core = "6.x"
 project = "votingapi"
-datestamp = "1398410666"
+datestamp = "1382165520"
 
