@@ -35,7 +35,7 @@ projects[apachesolr_og][download][revision] = "49820b4a4fcff7c1c4efe449da033fb6d
 
 ; Check the user object before trying to display a result.
 ; https://drupal.org/node/2077281#comment-7807937
-projects[apachesolr_og][patch][] = "https://drupal.org/files/issues/apachesolr_og-check-for-anonymous.patch"
+projects[apachesolr_og][patch][] = "http://drupal.org/files/issues/apachesolr_og-check-for-anonymous.patch"
 
 projects[apachesolr_proximity][type] = "module"
 projects[apachesolr_proximity][subdir] = "contrib"
@@ -72,15 +72,15 @@ projects[ckeditor][download][revision] = "b69a9ac"
 
 ; Only load CSS when necessary.
 ; https://drupal.org/node/1370894
-projects[ckeditor][patch][] = "https://drupal.org/files/issues/attach-ckeditor-css-1370894-8.patch"
+projects[ckeditor][patch][] = "http://drupal.org/files/issues/attach-ckeditor-css-1370894-8.patch"
 
 ; Accomodate latest Media changes.
 ; https://drupal.org/node/2159403
-projects[ckeditor][patch][] = "https://drupal.org/files/issues/ckeditor-accomodate-latest-media-changes-0.patch"
+projects[ckeditor][patch][] = "http://drupal.org/files/issues/ckeditor-accomodate-latest-media-changes-0.patch"
 
 ; Remove redundant external plugin declarations.
 ; https://drupal.org/comment/8284591#comment-8284591
-projects[ckeditor][patch][] = "https://drupal.org/files/issues/ckeditor-remove-external-plugin-declarations-1-alt.patch"
+projects[ckeditor][patch][] = "http://drupal.org/files/issues/ckeditor-remove-external-plugin-declarations-1-alt.patch"
 
 projects[ctools][type] = "module"
 projects[ctools][subdir] = "contrib"
@@ -88,7 +88,7 @@ projects[ctools][download][type] = "git"
 projects[ctools][download][url] = "http://git.drupal.org/project/ctools.git"
 projects[ctools][download][branch] = "7.x-1.x"
 projects[ctools][download][revision] = "6e034cb9"
-projects[ctools][patch][] = "https://drupal.org/files/issues/missing-ctools-version-2269747-1.patch"
+projects[ctools][patch][] = "http://drupal.org/files/issues/missing-ctools-version-2269747-1.patch"
 
 projects[custom_search][type] = "module"
 projects[custom_search][subdir] = "contrib"
@@ -169,7 +169,7 @@ projects[file_entity][version] = "2.0-alpha3"
 
 ; Issue #2081713: Fix undefined index errors with empty (remote) files.
 ; https://drupal.org/node/2081713
-projects[file_entity][patch][] = "https://drupal.org/files/issues/add-filesize-checks-2081713-13.patch"
+projects[file_entity][patch][] = "http://drupal.org/files/issues/add-filesize-checks-2081713-13.patch"
 
 projects[flag][type] = "module"
 projects[flag][subdir] = "contrib"
@@ -177,11 +177,11 @@ projects[flag][version] = "2.2"
 
 ; Issue #1965760: Manually set taxonomy term flag types because its different.
 ; http://drupal.org/node/1965760
-projects[flag][patch][] = "https://drupal.org/files/issues/1965760.29.flag_.entity-tokens.patch"
+projects[flag][patch][] = "http://drupal.org/files/issues/1965760.29.flag_.entity-tokens.patch"
 
 ; Provide a hook to allow default flag definitions to be altered.
 ; https://drupal.org/node/2027091#comment-8012263
-projects[flag][patch][] = "https://drupal.org/files/flag-default-flags-alter-hook-2027091-03.patch"
+projects[flag][patch][] = "http://drupal.org/files/flag-default-flags-alter-hook-2027091-03.patch"
 
 projects[flag_abuse][type] = "module"
 projects[flag_abuse][subdir] = "contrib"
@@ -238,7 +238,7 @@ projects[media][download][revision] = "b2c2d78"
 
 ; New filelfield browser widget is massively confusing the user
 ; https://drupal.org/comment/8570379#comment-8570379
-projects[media][patch][] = "https://drupal.org/files/issues/automatically-attach-files-2216329-2.patch"
+projects[media][patch][] = "http://drupal.org/files/issues/automatically-attach-files-2216329-2.patch"
 
 projects[media_oembed][type] = "module"
 projects[media_oembed][subdir] = "contrib"
@@ -246,7 +246,7 @@ projects[media_oembed][version] = "2.1"
 
 projects[memcache][type] = "module"
 projects[memcache][subdir] = "contrib"
-projects[memcache][version] = "1.0"
+projects[memcache][version] = "1.2"
 
 projects[menu_attributes][type] = "module"
 projects[menu_attributes][subdir] = "contrib"
@@ -254,7 +254,10 @@ projects[menu_attributes][version] = "1.0-rc2"
 
 projects[message][type] = "module"
 projects[message][subdir] = "contrib"
-projects[message][version] = "1.9"
+projects[message][download][type] = "git"
+projects[message][download][url] = "http://git.drupal.org/project/message.git"
+projects[message][download][branch] = "7.x-1.x"
+projects[message][download][revision] = "3bbdd5e6"
 
 ; Make message access alterable.
 ; http://drupal.org/node/1920560#comment-7080942
@@ -264,6 +267,10 @@ projects[message][patch][] = "http://drupal.org/files/1920560-message-access-alt
 ; http://drupal.org/node/2006702#comment-7842259
 projects[message][patch][] = "http://drupal.org/files/message_field_undefined-lang.2006702-14.patch"
 
+; Fix Undefined index: message_type in _field_ui on field listings
+; https://drupal.org/node/1391442
+projects[message][patch][] = "http://drupal.org/files/issues/message-entity_info_hook_notice_undefined_index-1391442-34.patch"
+
 projects[message_notify][type] = "module"
 projects[message_notify][subdir] = "contrib"
 projects[message_notify][version] = "2.5"
@@ -271,7 +278,15 @@ projects[message_notify][version] = "2.5"
 projects[message_subscribe][type] = "module"
 projects[message_subscribe][subdir] = "contrib"
 projects[message_subscribe][version] = "1.0-rc2"
-projects[message_subscribe][patch][] = "https://drupal.org/files/issues/group-context-1828184-53.patch"
+
+; Message Subscribe sends emails regardless of context
+; https://www.drupal.org/node/1828184
+projects[message_subscribe][patch][] = "http://drupal.org/files/issues/group-context-1828184-53.patch"
+
+; By default, don't notify blocked users
+; https://www.drupal.org/node/2184567
+projects[message_subscribe][patch][] = "http://drupal.org/files/issues/2184567-message-subscribe-blocked-users-23.patch"
+
 
 projects[metatag][type] = "module"
 projects[metatag][subdir] = "contrib"
@@ -291,7 +306,7 @@ projects[navbar][version] = "1.4"
 
 ; Change I-beam cursors in the navbar to be a pointer instead.
 ; https://drupal.org/node/2173041
-projects[navbar][patch][] = "https://drupal.org/files/issues/2173041-3-i-beam-menu-hover.patch"
+projects[navbar][patch][] = "http://drupal.org/files/issues/2173041-3-i-beam-menu-hover.patch"
 
 projects[oauth][type] = "module"
 projects[oauth][subdir] = "contrib"
@@ -313,7 +328,7 @@ projects[oembed][download][revision] = "9aa5303"
 
 ; Remove the media submodule as it conflicts with the Media: oEmbed module.
 ; https://drupal.org/node/2269745#comment-8796261
-projects[oembed][patch][] = "https://drupal.org/files/issues/remove-media-submodule-2269745-2.patch"
+projects[oembed][patch][] = "http://drupal.org/files/issues/remove-media-submodule-2269745-2.patch"
 
 projects[og][type] = "module"
 projects[og][subdir] = "contrib"
@@ -355,23 +370,23 @@ projects[picture][download][revision] = "18b94b9"
 
 ; Add ctools as a dependency
 ; https://drupal.org/node/2173043
-projects[picture][patch][] = "https://drupal.org/files/issues/add-ctools-dependency-2173043-1.patch"
+projects[picture][patch][] = "http://drupal.org/files/issues/add-ctools-dependency-2173043-1.patch"
 
 ; Allow filter tips to be translated
 ; https://drupal.org/node/2139459
-projects[picture][patch][] = "https://drupal.org/files/issues/translate-filter-tips-2139459-1.patch"
+projects[picture][patch][] = "http://drupal.org/files/issues/translate-filter-tips-2139459-1.patch"
 
 ; Move hook_uninstall() to picture.install to fix issues on uninstall.
 ; https://drupal.org/node/2173015
-projects[picture][patch][] = "https://drupal.org/files/issues/move-uninstall-hook-implementation-2173015-1.patch"
+projects[picture][patch][] = "http://drupal.org/files/issues/move-uninstall-hook-implementation-2173015-1.patch"
 
 ; Remove implementation of hook_file_formatter_info() to remove duplicate file formatter.
 ; https://drupal.org/node/2172841
-projects[picture][patch][] = "https://drupal.org/files/issues/remove-file-formatter-hook-implementation-2172831-1.patch"
+projects[picture][patch][] = "http://drupal.org/files/issues/remove-file-formatter-hook-implementation-2172831-1.patch"
 
 ; Remove implementation of hook_ctools_plugin_api() to fix issues with features.
 ; https://drupal.org/node/2172831
-projects[picture][patch][] = "https://drupal.org/files/issues/remove-ctools-hook-implementation-2172831-1.patch"
+projects[picture][patch][] = "http://drupal.org/files/issues/remove-ctools-hook-implementation-2172831-1.patch"
 
 projects[pm_existing_pages][type] = "module"
 projects[pm_existing_pages][subdir] = "contrib"
@@ -416,7 +431,7 @@ projects[rate][patch][] = "http://drupal.org/files/947516-rate-node-links-15.pat
 
 ; Only load CSS when necessary.
 ; https://drupal.org/node/2180853
-projects[rate][patch][] = "https://drupal.org/files/issues/attach-rate-css-2180853-3.patch"
+projects[rate][patch][] = "http://drupal.org/files/issues/attach-rate-css-2180853-3.patch"
 
 projects[realname][type] = "module"
 projects[realname][subdir] = "contrib"
@@ -424,7 +439,7 @@ projects[realname][version] = "1.2"
 
 ; Realname entityreference autocomplete API update
 ; https://drupal.org/node/2225889
-projects[realname][patch][] = "https://drupal.org/files/issues/2225889-realname-correct-menu-2.patch"
+projects[realname][patch][] = "http://drupal.org/files/issues/2225889-realname-correct-menu-3.patch"
 
 projects[redirect][type] = "module"
 projects[redirect][subdir] = "contrib"
@@ -452,7 +467,7 @@ projects[search_facetapi][version] = "1.0-beta2"
 
 projects[sharethis][type] = "module"
 projects[sharethis][subdir] = "contrib"
-projects[sharethis][version] = "2.6"
+projects[sharethis][version] = "2.8"
 
 projects[smartcrop][type] = "module"
 projects[smartcrop][subdir] = "contrib"
@@ -495,7 +510,7 @@ projects[views][version] = "3.8"
 
 ; Update Views Content access filter per core performance improvements.
 ; https://drupal.org/comment/8516039#comment-8516039
-projects[views][patch][] = "https://drupal.org/files/issues/views-content_access_filter_per_core_performance-2204257-4_0.patch"
+projects[views][patch][] = "http://drupal.org/files/issues/views-content_access_filter_per_core_performance-2204257-4_0.patch"
 
 projects[views_bulk_operations][type] = "module"
 projects[views_bulk_operations][subdir] = "contrib"
@@ -515,7 +530,7 @@ projects[views_load_more][version] = "1.2"
 
 ; Suppress notice error when loading more content from views_load_more.
 ; https://drupal.org/node/2207467
-projects[views_load_more][patch][] = "https://drupal.org/files/issues/fix-notice-undefined-index-2152935-3.patch"
+projects[views_load_more][patch][] = "http://drupal.org/files/issues/fix-notice-undefined-index-2152935-3.patch"
 
 projects[votingapi][type] = "module"
 projects[votingapi][subdir] = "contrib"

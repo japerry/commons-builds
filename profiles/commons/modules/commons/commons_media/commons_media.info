@@ -23,9 +23,9 @@ features[variable][] = file_entity_file_upload_wizard_skip_file_type
 features[variable][] = file_entity_file_upload_wizard_skip_scheme
 features[variable][] = media_dialog_theme
 
-; Information added by Drupal.org packaging script on 2014-05-22
-version = "7.x-3.13"
+; Information added by Drupal.org packaging script on 2014-06-20
+version = "7.x-3.14"
 core = "7.x"
 project = "commons"
-datestamp = "1400787228"
+datestamp = "1403222665"
 

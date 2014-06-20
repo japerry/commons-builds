@@ -30,9 +30,9 @@ features[variable][] = search_active_modules
 features[variable][] = search_default_module
 features_exclude[dependencies][ctools] = ctools
 
-; Information added by Drupal.org packaging script on 2014-05-22
-version = "7.x-3.13"
+; Information added by Drupal.org packaging script on 2014-06-20
+version = "7.x-3.14"
 core = "7.x"
 project = "commons"
-datestamp = "1400787228"
+datestamp = "1403222665"
 
