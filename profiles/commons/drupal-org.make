@@ -7,6 +7,10 @@ projects[acquia_connector][type] = "module"
 projects[acquia_connector][subdir] = "contrib"
 projects[acquia_connector][version] = "2.14"
 
+; Fix signup messages displayed during install.
+; https://drupal.org/node/2289903#comment-8899833
+projects[acquia_connector][patch][] = "http://drupal.org/files/issues/move-message-generation-2289903-1.patch"
+
 projects[addressfield][type] = "module"
 projects[addressfield][subdir] = "contrib"
 projects[addressfield][version] = "1.0-beta5"
@@ -589,7 +593,7 @@ libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/ar
 
 libraries[timeago][download][type] = "get"
 libraries[timeago][type] = "libraries"
-libraries[timeago][download][url] = "https://raw.github.com/rmm5t/jquery-timeago/v1.4.1/jquery.timeago.js"
+libraries[timeago][download][url] = "https://raw.githubusercontent.com/rmm5t/jquery-timeago/v1.4.1/jquery.timeago.js"
 
 libraries[underscore][download][type] = "get"
 libraries[underscore][type] = "libraries"
