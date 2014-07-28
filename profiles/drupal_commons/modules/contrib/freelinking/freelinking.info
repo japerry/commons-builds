@@ -12,9 +12,10 @@ project = "freelinking"
 datestamp = "1257768612"
 
 
-; Information added by drupal.org packaging script on 2011-08-19
-version = "6.x-3.2"
+
+; Information added by drush on 2014-07-28
+version = "6.x-3.2+4-dev"
 core = "6.x"
 project = "freelinking"
-datestamp = "1313751416"
+datestamp = "1406579030"
 

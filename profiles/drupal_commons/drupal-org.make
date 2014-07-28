@@ -17,7 +17,7 @@ projects[acquia_connector][version] = "2.15"
 
 projects[acquia_search][type] = "module"
 projects[acquia_search][subdir] = "acquia"
-projects[acquia_search][version] = "1.5702"
+projects[acquia_search][version] = "1.5704"
 
 projects[ajax_load][type] = "module"
 projects[ajax_load][subdir] = "contrib"
@@ -111,14 +111,22 @@ projects[features][subdir] = "contrib"
 
 projects[filefield][type] = "module"
 projects[filefield][subdir] = "contrib"
-projects[filefield][version] = "3.12"
+projects[filefield][version] = "3.13"
 
 projects[flag][type] = "module"
 projects[flag][subdir] = "contrib"
 projects[flag][version] = "1.5"
 
+; Freelinking isn't supported anymore and is disabled by default in commons now
+; Leaving for historic needs, please migrate away from this module!
+; See https://www.drupal.org/node/2308503 for more info.
+
 projects[freelinking][type] = "module"
 projects[freelinking][subdir] = "contrib"
+projects[freelinking][download][type] = "git"
+projects[freelinking][download][url] = "http://git.drupal.org/project/freelinking.git"
+projects[freelinking][download][branch] = "6.x-3.x"
+projects[freelinking][download][revision] = "86788e5c"
 
 projects[getid3][type] = "module"
 projects[getid3][subdir] = "contrib"
@@ -228,6 +236,7 @@ projects[og_subgroups][subdir] = "contrib"
 
 projects[password_policy][type] = "module"
 projects[password_policy][subdir] = "contrib"
+projects[password_policy][version] = "1.8"
 
 projects[pathauto][type] = "module"
 projects[pathauto][subdir] = "contrib"

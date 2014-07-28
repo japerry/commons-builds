@@ -44,6 +44,9 @@ function freelinking_get_freelink($plugin, $target, $format = 'all', $rendered =
       return FALSE;
     }
   }
+  if (isset($link['error'])) {
+    return theme('freelink_error', array('plugin' => $plugin, 'message' => $link['error']));
+  }
 
   if (function_exists('theme_freelink_' . $plugin)) {
     return theme('freelink_' . $plugin, $link);

@@ -46,9 +46,9 @@ settings[sidebar_layout] = sidebars-split
 settings[sidebar_first_width] = 4
 settings[sidebar_last_width] = 5
 
-; Information added by Drupal.org packaging script on 2014-06-20
-version = "6.x-2.18"
+; Information added by Drupal.org packaging script on 2014-07-28
+version = "6.x-2.19"
 core = "6.x"
 project = "commons"
-datestamp = "1403301231"
+datestamp = "1406569729"
 
