@@ -8,9 +8,9 @@ files[] = strongarm.install
 files[] = strongarm.module
 
 
-; Information added by drush on 2014-06-25
+; Information added by drush on 2014-07-25
 version = "7.x-2.0+2-dev"
 core = "7.x"
 project = "strongarm"
-datestamp = "1403672637"
+datestamp = "1406328909"
 

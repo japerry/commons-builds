@@ -151,9 +151,17 @@ projects[entityreference][type] = "module"
 projects[entityreference][subdir] = "contrib"
 projects[entityreference][version] = "1.1"
 
+; Autocomplete widgets cannot reference a single entity result.
+; http://drupal.org/node/1959624#comment-8451891
+projects[entityreference][patch][] = "http://drupal.org/files/issues/entityreference-autocomplete-widget-single-entity-1959624-6.patch"
+
 projects[entityreference_prepopulate][type] = "module"
 projects[entityreference_prepopulate][subdir] = "contrib"
 projects[entityreference_prepopulate][version] = "1.5"
+
+; Entityreference prepopulate overwrites field instance custom default value functions.
+; http://drupal.org/node/2304301#comment-8973459
+projects[entityreference_prepopulate][patch][] = "http://drupal.org/files/issues/check-for-default-value-function-2304301-1.patch"
 
 projects[entity_translation][type] = "module"
 projects[entity_translation][subdir] = "contrib"
@@ -161,7 +169,7 @@ projects[entity_translation][version] = "1.0-beta3"
 
 projects[facetapi][type] = "module"
 projects[facetapi][subdir] = "contrib"
-projects[facetapi][version] = "1.3"
+projects[facetapi][version] = "1.5"
 
 projects[features][type] = "module"
 projects[features][subdir] = "contrib"
@@ -204,7 +212,10 @@ projects[http_client][version] = "2.4"
 
 projects[i18n][type] = "module"
 projects[i18n][subdir] = "contrib"
-projects[i18n][version] = "1.11"
+projects[i18n][download][type] = "git"
+projects[i18n][download][url] = "http://git.drupal.org/project/i18n.git"
+projects[i18n][download][branch] = "7.x-1.x"
+projects[i18n][download][revision] = "3777b86"
 
 projects[i18nviews][type] = "module"
 projects[i18nviews][subdir] = "contrib"
@@ -227,7 +238,7 @@ projects[libraries][version] = "2.2"
 
 projects[lingotek][type] = "module"
 projects[lingotek][subdir] = "contrib"
-projects[lingotek][version] = "5.07"
+projects[lingotek][version] = "5.09"
 
 projects[link][type] = "module"
 projects[link][subdir] = "contrib"
@@ -291,10 +302,13 @@ projects[message_subscribe][patch][] = "http://drupal.org/files/issues/group-con
 ; https://www.drupal.org/node/2184567
 projects[message_subscribe][patch][] = "http://drupal.org/files/issues/2184567-message-subscribe-blocked-users-23.patch"
 
-
 projects[metatag][type] = "module"
 projects[metatag][subdir] = "contrib"
-projects[metatag][version] = "1.0-beta9"
+projects[metatag][version] = "1.0-rc1"
+
+; Don't show the warnings on the status page for transliteration and imagecache_token modules.
+; https://www.drupal.org/node/2306449
+projects[metatag][patch][] = "http://drupal.org/files/issues/2306449-metatag-recommended-modules-status-2.patch"
 
 projects[module_filter][type] = "module"
 projects[module_filter][subdir] = "contrib"
@@ -345,6 +359,10 @@ projects[og][patch][] = "http://drupal.org/files/issues/og-default-role-member-2
 ; og_ui should give users the theme, not admin ui when creating groups.
 ; http://drupal.org/node/1800208
 projects[og][patch][] = "http://drupal.org/files/og_ui-group_node_add_theme-1800208-5.patch"
+
+; Missing permissions when installing a new site.
+; http://drupal.org/node/2301831
+projects[og][patch][] = "http://drupal.org/files/issues/og-missing-permission-roles-2301831-1.patch"
 
 projects[panelizer][type] = "module"
 projects[panelizer][subdir] = "contrib"
@@ -455,7 +473,7 @@ projects[registration][version] = "1.3"
 
 projects[rich_snippets][type] = "module"
 projects[rich_snippets][subdir] = "contrib"
-projects[rich_snippets][version] = "1.0-beta3"
+projects[rich_snippets][version] = "1.0-beta4"
 
 projects[rules][type] = "module"
 projects[rules][subdir] = "contrib"

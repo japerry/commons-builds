@@ -10,6 +10,11 @@ mysql:
 
 env:
   - UPGRADE=none
+  - UPGRADE=7.x-3.15
+  - UPGRADE=7.x-3.14
+  - UPGRADE=7.x-3.13
+  - UPGRADE=7.x-3.12
+  - UPGRADE=7.x-3.11
   - UPGRADE=7.x-3.10
   - UPGRADE=7.x-3.9
   - UPGRADE=7.x-3.8
@@ -20,6 +25,11 @@ env:
 matrix:
   fast_finish: true
   allow_failures:
+    - env: UPGRADE=7.x-3.15
+    - env: UPGRADE=7.x-3.14
+    - env: UPGRADE=7.x-3.13
+    - env: UPGRADE=7.x-3.12
+    - env: UPGRADE=7.x-3.11
     - env: UPGRADE=7.x-3.10
     - env: UPGRADE=7.x-3.9
     - env: UPGRADE=7.x-3.8
@@ -38,9 +48,7 @@ install:
 
   # Install the latest Drush 6.
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - pear channel-discover pear.drush.org
-  - pear install drush/drush-5.10.0.0
-  - phpenv rehash
+  - composer global require --no-interaction --prefer-source drush/drush:6.*@dev
 
   # Install Drupal.org drush.
   - drush dl -y drupalorg_drush-7.x-1.x-dev --destination=$HOME/.drush
@@ -100,8 +108,8 @@ install:
   - sudo md5sum $CHROME_SANDBOX
 
   # Get Selenium
-  - wget http://selenium-release.storage.googleapis.com/2.41/selenium-server-standalone-2.41.0.jar
-  - java -jar selenium-server-standalone-2.41.0.jar -Dwebdriver.chrome.driver=`pwd`/chromedriver > /dev/null 2>&1 &
+  - wget http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.1.jar
+  - java -jar selenium-server-standalone-2.42.1.jar > /dev/null 2>&1 &
   - sleep 5
  
   # Disable sendmail
@@ -112,8 +120,17 @@ before_script:
   # Do the site install (either the current revision or old for the upgrade).
   - if [[ "$UPGRADE" == none ]]; then cd drupal; else cd commons-$UPGRADE; fi
   - drush si commons --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --account-mail=admin@test.com --site-mail=noreply@test.com --site-name="Commons" --yes
+
+  # Configure the private and temporary file systems.
   - drush vset -y file_private_path "sites/default/private/files"
   - drush vset -y file_temporary_path "sites/default/private/temp"
+
+  # Disable database logging as it is unnecessary and reduces performance.
+  - drush pm-disable dblog --yes
+
+  # Enabled all non-default commons modules so that they can be tested.
+  - drush pm-enable commons_documents commons_notices --yes
+
   - cd ../drupal
 
   # If we're an upgrade test, run the upgrade process.
@@ -129,6 +146,9 @@ before_script:
   - export BEHAT_PARAMS="extensions[Drupal\\DrupalExtension\\Extension][drupal][drupal_root]=$BUILD_OWNER/drupal"
 
 script:
+
+  # If this isn't an upgrade, we test if any features are overridden.
+  - if [[ "$UPGRADE" == none ]]; then bash ../../scripts/check-overridden.sh; fi
 
   # First, run all the tests in Firefox.
   - ./bin/behat --config behat.travis.yml
