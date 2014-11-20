@@ -19,9 +19,9 @@ features[views_api][] = "api:2"
 name = "Commons Dashboard"
 package = "Commons"
 
-; Information added by Drupal.org packaging script on 2014-08-12
-version = "6.x-2.20"
+; Information added by Drupal.org packaging script on 2014-11-20
+version = "6.x-2.21"
 core = "6.x"
 project = "commons"
-datestamp = "1407856133"
+datestamp = "1416449359"
 
