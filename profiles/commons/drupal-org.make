@@ -17,7 +17,7 @@ projects[addressfield][version] = "1.0-beta5"
 
 projects[addressfield_tokens][type] = "module"
 projects[addressfield_tokens][subdir] = "contrib"
-projects[addressfield_tokens][version] = "1.4"
+projects[addressfield_tokens][version] = "1.5"
 
 projects[admin_icons][type] = "module"
 projects[admin_icons][subdir] = "contrib"
@@ -224,7 +224,7 @@ projects[lingotek][version] = "5.10"
 
 projects[link][type] = "module"
 projects[link][subdir] = "contrib"
-projects[link][version] = "1.2"
+projects[link][version] = "1.3"
 
 projects[media][type] = "module"
 projects[media][subdir] = "contrib"
@@ -240,7 +240,7 @@ projects[memcache][version] = "1.2"
 
 projects[menu_attributes][type] = "module"
 projects[menu_attributes][subdir] = "contrib"
-projects[menu_attributes][version] = "1.0-rc2"
+projects[menu_attributes][version] = "1.0-rc3"
 
 projects[message][type] = "module"
 projects[message][subdir] = "contrib"
