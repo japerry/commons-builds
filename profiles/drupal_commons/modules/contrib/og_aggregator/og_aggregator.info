@@ -7,9 +7,9 @@ package = "Organic groups"
 core = 6.x
 
 
-; Information added by drush on 2014-07-28
+; Information added by drush on 2014-08-12
 version = "6.x-1.4+3-dev"
 core = "6.x"
 project = "og_aggregator"
-datestamp = "1406579045"
+datestamp = "1407856146"
 

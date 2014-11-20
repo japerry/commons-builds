@@ -259,9 +259,9 @@ features[views][] = "tag_cloud"
 features[views][] = "user_meta"
 features[views_api][] = "api:2"
 
-; Information added by Drupal.org packaging script on 2014-07-28
-version = "6.x-2.19"
+; Information added by Drupal.org packaging script on 2014-08-12
+version = "6.x-2.20"
 core = "6.x"
 project = "commons"
-datestamp = "1406569729"
+datestamp = "1407856133"
 
